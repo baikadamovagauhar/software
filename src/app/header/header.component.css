@@ -1,0 +1,76 @@
+html,head,body{
+  max-width: 100%;
+  max-height: 100%;
+}
+.header{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #5f5f5f;
+  max-width: 100%;
+}
+.item{
+  margin-left: 50px;
+  margin-right: 50px;
+  font-size: 20px;
+}
+.item:hover{
+  color: #2E8B57;
+  font-weight: bold;
+  cursor: default;
+}
+.card p{
+  font-size: 20px;
+  margin-left: 20px;
+}
+.logo{
+  width: 180px;
+  height: 60px;
+}
+.about{
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.g1{
+  width: 460px;
+  height: 300px;
+}
+.aboutUs{
+  background-color: #FFF5EE;
+  height: 300px;
+  align-items: center;
+  text-align: center;
+}
+.thanks{
+  font-size: 25px;
+}
+.content{
+  text-align: center;
+  margin:40px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #008080;
+}
+.basketImg{
+  margin-right: 10px;
+}
+.loginImg{
+  width: 25px;
+  height: 25px;
+}
+.basketImg:hover{
+  cursor: pointer;
+  color: #5f5f5f;
+}
+.loginImg:hover{
+  cursor: pointer;
+}
+.images{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

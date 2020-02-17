@@ -1,0 +1,31 @@
+<div class="all">
+  <h2 class="titleOfSales"><i>Выгодные предложения</i></h2>
+  <div class="allSalesBox">
+  <div class='gallery'>
+    <img class="image1" src="https://in-scale.ru/wp-content/uploads/2018/10/reklamnye-akcii-shastliviye-chasy.jpg" alt="Image 1">
+    <div class="img23">
+      <img class='img2' src="https://promocod.kz/wp-content/uploads/2018/09/coca-cola.jpg" alt="Image 2">
+      <img class='img3' src="https://promocod.kz/wp-content/uploads/2014/05/leys.kz_.jpg" alt="Image 3">
+    </div>
+  </div>
+  </div>
+  <h2 class="title"><i>Популярные категории</i></h2>
+  <div class="popularCategory" >
+  <div class="categories" *ngFor="let category of popularCategoryList">
+    <div class="categoryBox">
+      <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
+      <div class="overlay">
+        <p class="text">{{category.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+  <h2 class="recomendation"><i>Покупатели рекомендуют</i></h2>
+  <div class="popularProducts">
+    <div class="products">
+      <div class="productBox" *ngFor="let product of popularProductList">
+        <img src="{{baseUrl}}/{{product.image }}" alt="">
+      </div>
+    </div>
+  </div>
+</div>
