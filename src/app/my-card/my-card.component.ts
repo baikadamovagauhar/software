@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import {CardProductsService} from "../card-products.service";
 
 @Component({
   selector: 'app-my-card',
@@ -22,10 +23,15 @@ export class MyCardComponent implements OnInit {
   @Input() closable = true;
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  data: any;
 
-  constructor() { }
+  constructor(private cardProductsService: CardProductsService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.cardProductsService.cart.subscribe((value) =>{
+      this.data = value;
+    })
+  }
 
   close() {
     this.visible = false;

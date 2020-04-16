@@ -1,0 +1,17 @@
+<p class="list-title"><i>Покупатели рекомендуют</i></p>
+<section class="main">
+  <div class="product-list" *ngFor="let product of popularProductList">
+    <div class="product">
+      <div class="product-card">
+        <img src="{{baseUrl}}/{{product.image }}" alt="" class="product-img">
+        <p class="product-title">{{product.title}}</p>
+        <section class="product-price">
+          <p class="price-title">Цена</p>
+          <p class="price">{{product.price}}</p>
+        </section>
+      </div>
+      <button class="addBasket" (click)="addToCart()"> {{ !isInCart ? 'В корзину' : 'Перейти в корзину' }}</button>
+    </div>
+  </div>
+</section>
+

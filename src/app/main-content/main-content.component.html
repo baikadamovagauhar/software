@@ -1,31 +1,69 @@
-<div class="all">
-  <h2 class="titleOfSales"><i>Выгодные предложения</i></h2>
-  <div class="allSalesBox">
-  <div class='gallery'>
-    <img class="image1" src="https://in-scale.ru/wp-content/uploads/2018/10/reklamnye-akcii-shastliviye-chasy.jpg" alt="Image 1">
-    <div class="img23">
-      <img class='img2' src="https://promocod.kz/wp-content/uploads/2018/09/coca-cola.jpg" alt="Image 2">
-      <img class='img3' src="https://promocod.kz/wp-content/uploads/2014/05/leys.kz_.jpg" alt="Image 3">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<ngb-carousel *ngIf="imageUrlArray">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="imageUrlArray[0]" alt="Random first slide" class="imgs">
     </div>
-  </div>
-  </div>
-  <h2 class="title"><i>Популярные категории</i></h2>
-  <div class="popularCategory" >
-  <div class="categories" *ngFor="let category of popularCategoryList">
-    <div class="categoryBox">
-      <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
-      <div class="overlay">
-        <p class="text">{{category.title}}</p>
-      </div>
+    <div class="carousel-caption">
+      <h3 class = "slide1-title" >Самая быстрая доставка продуктов на дом!</h3>
+      <p class="slide1-txt">Не нужно тратить свое время и время своих близких на закупки, лучше проведите
+        его вместе с ними, а мы позаботимся, чтобы все необходимое было всегда рядом</p>
     </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="imageUrlArray[1]" alt="Random second slide" class="imgs">
+    </div>
+    <div class="carousel-caption2">
+      <h3 class="slide2-title">Самые свежие продукты каждый день! </h3>
+      <button class="orderBtn">Заказать сейчас! </button>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="imageUrlArray[2]"  alt="Random third slide" class="imgs">
+    </div>
+    <div class="carousel-caption">
+      <h3 class="slide3-title">Теперь, вы можете заказать ваши любимые овощи и фрукты в любое время по номеру <a class="num" href="tel:1402">1402</a></h3>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+<div class="gifs">
+  <div class="gif">
+    <img src="../../assets/images/transit.png" alt="transitLogo" class="gif__img">
+    <p class="nav-txt">Бесплатная доставка</p>
+  </div>
+  <div class="gif">
+    <img src="../../assets/images/support.png" alt="supportLogo" class="gif__img">
+    <p class="nav-txt">Call Центр 24/7</p>
+  </div>
+  <div class="gif">
+    <img src="../../assets/images/money.png" alt="moneyLogo" class="gif__img">
+    <p class="nav-txt">Низкие цены</p>
+  </div>
+  <div class="gif">
+    <img src="../../assets/images/gift.png" alt="giftLogo" class="gif__img">
+    <p class="nav-txt">Подарки каждую неделю</p>
   </div>
 </div>
-  <h2 class="recomendation"><i>Покупатели рекомендуют</i></h2>
-  <div class="popularProducts">
-    <div class="products">
-      <div class="productBox" *ngFor="let product of popularProductList">
-        <img src="{{baseUrl}}/{{product.image }}" alt="">
-      </div>
-    </div>
+<section class="banner">
+  <div class="block1">
+    <img src="../../assets/images/coffe.jpg" alt="" class="bn-img">
+    <img src="../../assets/images/rekl1.jpg" alt="" class="bn-img">
   </div>
-</div>
+  <div class="block2">
+    <img src="../../assets/images/rekl6.jpg" alt="" class="bn-img2">
+  </div>
+</section>
+
+<section class="popular">
+  <p class="pop-title">Последнее поступление</p>
+  <p class="pop-txt">Свежие продукты !</p>
+  <div class="btns">
+    <button class="hvr-bubble-bottom">Все</button>
+    <button class="btnPr">Овощи</button>
+    <button class="btnPr">Фрукты</button>
+    <button class="btnPr">Хлеб</button>
+  </div>
+</section>
