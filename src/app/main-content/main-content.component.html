@@ -49,11 +49,11 @@
 </div>
 <section class="banner">
   <div class="block1">
-    <img src="../../assets/images/coffe.jpg" alt="" class="bn-img">
     <img src="../../assets/images/rekl1.jpg" alt="" class="bn-img">
+    <img src="../../assets/images/rekl2.jpg" alt="" class="bn-img">
   </div>
   <div class="block2">
-    <img src="../../assets/images/rekl6.jpg" alt="" class="bn-img2">
+    <img src="../../assets/images/rekl3.jpg" alt="" class="bn-img2">
   </div>
 </section>
 
@@ -61,9 +61,91 @@
   <p class="pop-title">Последнее поступление</p>
   <p class="pop-txt">Свежие продукты !</p>
   <div class="btns">
-    <button class="hvr-bubble-bottom">Все</button>
+    <button class="btnPr">Все</button>
     <button class="btnPr">Овощи</button>
     <button class="btnPr">Фрукты</button>
     <button class="btnPr">Хлеб</button>
   </div>
+</section>
+
+<section class="otzyvy">
+  <ngb-carousel *ngIf="imageUrlArray">
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img src= "../../assets/images/otz.jpg" alt="" class="otzyv-img">
+      </div>
+      <div class="clients">
+        <h3 class = "posl-otz" >Наши любимые клиенты</h3>
+        <section class="otz-block">
+          <img src="../../assets/images/quote.png" alt="" class="quote">
+          <p class="otz-txt">
+            Как и многие динозавры, раньше за покупками я всегда шла в сетевые магазины.
+            Ну и конечно довольствовалась имеющимся выбором. Но мои потребности привели меня к тому, что
+            иногда просто нет возможности выходить из дома и идти в магазин.
+            И мне пришлось идти на просторы интернета в поисках качественного поставщика. И я его нашла</p>
+          <section class="user">
+            <img src="../../assets/images/Ainura.jpg" alt="" class="selfie">
+            <div class="user-name">
+              <p class="name">Айнур Секербекова</p>
+              <p class="client">Клиент</p>
+            </div>
+          </section>
+        </section>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img src= "../../assets/images/otz.jpg" alt="" class="otzyv-img">
+      </div>
+      <div class="clients">
+        <h3 class = "posl-otz" >Наши любимые клиенты</h3>
+        <section class="otz-block">
+          <img src="../../assets/images/quote.png" alt="" class="quote">
+          <p class="otz-txt">Отличный сервис, все товары были доставлены в договоренное время. Продукты свежие и коробки непомятые. Буду пользоваться дальше, порекомендую своим друзьям.</p>
+          <section class="user">
+            <img src="../../assets/images/Madina.jpg" alt="" class="selfie">
+            <div class="user-name">
+              <p class="name">Мадина Багыткалиева</p>
+              <p class="client">Клиент</p>
+            </div>
+          </section>
+        </section>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="picsum-img-wrapper">
+        <img src= "../../assets/images/otz.jpg" alt="" class="otzyv-img">
+      </div>
+      <div class="clients">
+        <h3 class = "posl-otz" >Наши любимые клиенты</h3>
+        <section class="otz-block">
+          <img src="../../assets/images/quote.png" alt="" class="quote">
+          <p class="otz-txt">
+            Услугами магазина EzShop пользуюсь уже очень давно. Наверно я один из первых их клиентов. Могу отметить, что за это время магазин ничуть не изменился. Качество продуктов и обслуживание все так же остаются на высоте.</p>
+          <section class="user">
+            <img src="../../assets/images/Galym.jpg" alt="" class="selfie">
+            <div class="user-name">
+              <p class="name">Галым Жарысов</p>
+              <p class="client">Клиент</p>
+            </div>
+          </section>
+        </section>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</section>
+<h2 class="title"><i>Популярные категории</i></h2>
+<div class="popularCategory" >
+  <div class="categories" *ngFor="let category of popularCategoryList">
+    <div class="categoryBox">
+      <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
+      <div class="overlay">
+        <p class="text">{{category.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="questions">
+
 </section>
