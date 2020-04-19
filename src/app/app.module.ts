@@ -16,7 +16,7 @@ import { SliderModule } from 'angular-image-slider';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SlideshowModule} from 'ng-simple-slideshow';
-import {SlideshowModule} from 'ng-slideshow';
+
 
 @NgModule({
     declarations: [
@@ -39,8 +39,6 @@ import {SlideshowModule} from 'ng-slideshow';
     NgbCarouselModule,
     NgbModule,
     SlideshowModule,
-    SlideshowModule,
-    SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

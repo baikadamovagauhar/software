@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class RequestService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://fec1b8e7.ngrok.io//';
+  baseUrl = 'http://77557883.ngrok.io/';
 
   getProduct(){
     return this.http.get(`${this.baseUrl}/api/get-products`)

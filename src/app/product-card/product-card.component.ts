@@ -27,7 +27,7 @@ export class ProductCardComponent implements OnInit {
   popularProductList = [];
   products: any;
   isInCart = false;
-  baseUrl = 'http://fec1b8e7.ngrok.io//';
+  baseUrl = 'http://77557883.ngrok.io/';
 
   constructor(
     private http: HttpClient,

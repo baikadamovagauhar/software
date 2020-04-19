@@ -16,7 +16,7 @@
     </div>
     <div class="carousel-caption2">
       <h3 class="slide2-title">Самые свежие продукты каждый день! </h3>
-      <button class="orderBtn">Заказать сейчас! </button>
+      <button class="orderBtn" (click)="scroll(target)">Заказать сейчас! </button>
     </div>
   </ng-template>
   <ng-template ngbSlide>
@@ -32,7 +32,7 @@
 <div class="gifs">
   <div class="gif">
     <img src="../../assets/images/transit.png" alt="transitLogo" class="gif__img">
-    <p class="nav-txt">Бесплатная доставка</p>
+    <p class="nav-txt">Быстрая экспресс доставка</p>
   </div>
   <div class="gif">
     <img src="../../assets/images/support.png" alt="supportLogo" class="gif__img">
@@ -49,22 +49,70 @@
 </div>
 <section class="banner">
   <div class="block1">
-    <img src="../../assets/images/rekl1.jpg" alt="" class="bn-img">
     <img src="../../assets/images/rekl2.jpg" alt="" class="bn-img">
-  </div>
-  <div class="block2">
-    <img src="../../assets/images/rekl3.jpg" alt="" class="bn-img2">
+    <img src="../../assets/images/rekl1.jpg" alt="" class="bn-img">
+    <img src="../../assets/images/rekl3.jpg" alt="" class="bn-img">
   </div>
 </section>
 
 <section class="popular">
-  <p class="pop-title">Последнее поступление</p>
-  <p class="pop-txt">Свежие продукты !</p>
-  <div class="btns">
-    <button class="btnPr">Все</button>
-    <button class="btnPr">Овощи</button>
-    <button class="btnPr">Фрукты</button>
-    <button class="btnPr">Хлеб</button>
+  <p class="pop-title" #target>Бестселлеры</p>
+  <p class="pop-txt">Покупатели рекомендуют</p>
+<!--  <div class="btns">-->
+<!--    <button class="btnPr">Все</button>-->
+<!--    <button class="btnPr">Сегодня</button>-->
+<!--    <button class="btnPr">Фрукты</button>-->
+<!--    <button class="btnPr">Хлеб</button>-->
+<!--  </div>-->
+  <div class="popularProducts" >
+    <div class="ProductsList" *ngFor="let product of popularProductList">
+      <div class="productContent">
+        <img src="{{baseUrl}}/{{product.image}}" alt="title" class="content-image">
+        <div class="product-info">
+          <p class="product-title">{{product.title}}</p>
+          <div class="product-price-details">
+            <section class="price">
+              <p class="block-caption">Цена</p>
+              <p class="price-txt">{{product.price * inputNum}} ₸</p>
+            </section>
+            <div class="number">
+              <span class="minus" (click)="minus()">-</span>
+              <input type="text" value="{{inputNum}}" class="inp"/>
+              <span class="plus" (click)="plus()">+</span>
+            </div>
+            <button class="addCard" (click)="addToCart(product)">В корзину</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<h2 class="pop-txt"><i>Популярные категории</i></h2>
+<div class="popularCategory" >
+  <div class="categories" *ngFor="let category of popularCategoryList">
+    <div class="categoryBox">
+      <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
+      <div class="overlay">
+        <p class="text">{{category.title}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="aboutUs">
+  <img src="../../assets/images/about.jpg" alt="" class="aboutUsImg">
+  <div class="aboutUsTxt">
+    <p class="title1">Несколько слов о нашем магазине</p>
+    <p class="title2">Почему именно мы?</p>
+    <p class="title3">Представьте вы пришли домой после работы уставшими и захотели просто покушать, а дома ничего нету поесть и на улицу опять выходить
+      будет лень.
+      Ну или вы хотите приготовить вкусный и полезный ужин, и вам не хватает нужного ингредиента
+      для Вашего кулинарного шедевра, который так хочется приготовить? Что же делать в такие моменты?
+      Теперь купить продукты питания можно просто и комфортно, даже не выходя на улицу.
+      Что уж говорить о колоссальной экономии времени, да и денег. Теперь Вы точно не купите лишнюю газировку или
+      шоколадку, когда устанете бродить по магазину, и Ваш бюджет не пострадает от ненужных трат. Плюс ко всему
+      такие ненавистные очереди останутся навсегда в прошлом. Наш интернет-магазин Ez Shop предлагает широкий ассортимент
+      товаров.</p>
   </div>
 </section>
 
@@ -134,18 +182,6 @@
     </ng-template>
   </ngb-carousel>
 </section>
-<h2 class="title"><i>Популярные категории</i></h2>
-<div class="popularCategory" >
-  <div class="categories" *ngFor="let category of popularCategoryList">
-    <div class="categoryBox">
-      <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
-      <div class="overlay">
-        <p class="text">{{category.title}}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<section class="questions">
-
-</section>
+<button (click)="scrollTop()" [ngClass]="{scrollNot: visibility, scroll: !visibility}">
+  <img src="../../assets/images/icons8-long-arrow-up-100.png" alt="" class="arrowTop">
+</button>

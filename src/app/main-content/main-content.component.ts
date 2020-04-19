@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {RequestService} from '../request.service';
 import {takeUntil} from 'rxjs/operators';
@@ -18,8 +18,10 @@ export class MainContentComponent implements OnInit, OnDestroy {
   popularProductList = [];
   imageUrlArray = [];
   banner = [];
+  visibility = false;
+  inputNum = 1;
 
-  baseUrl = 'http://fec1b8e7.ngrok.io/';
+  baseUrl = 'http://77557883.ngrok.io/';
   constructor(private http: HttpClient, private requestService: RequestService, config: NgbCarouselConfig ) {
     config.interval = 10000;
     config.wrap = false;
@@ -46,6 +48,28 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.popularProductList = data;
       }
     });
+  }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+  scrollTop() {
+    scrollTo(0, 0);
+  }
+
+  @HostListener( 'window : scroll', [])
+  onScroll(): void {
+    if (window.innerHeight > window.scrollY) {
+      this.visibility = true;
+    } else {
+      this.visibility = false;
+    }
+  }
+  addToCart(product) {}
+  minus() {
+    this.inputNum -= 1;
+  }
+  plus() {
+    this.inputNum += 1;
   }
 
   ngOnDestroy(): void {

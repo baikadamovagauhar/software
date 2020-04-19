@@ -19,7 +19,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
-    "@ng-bootstrap/ng-bootstrap": "^6.0.2",
+    "@ng-bootstrap/ng-bootstrap": "^5.3.0",
     "angular-image-slider": "0.0.9",
     "bootstrap": "^4.4.1",
     "hover.css": "^2.3.2",
