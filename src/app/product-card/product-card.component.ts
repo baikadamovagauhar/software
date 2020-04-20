@@ -41,7 +41,7 @@ export class ProductCardComponent implements OnInit {
         this.products = data;
         console.log(this.products);
       }
-    })
+    });
     this.requestService.getCategory().pipe(takeUntil(this.unsub$)).subscribe((data:any)=>{
       if (data) {
         this.categoryList = data;
@@ -52,7 +52,7 @@ export class ProductCardComponent implements OnInit {
         this.popularCategoryList = data;
       }
     });
-    this.requestService.getPopularProducts().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+    this.requestService.getPopularProducts('Алматы, улица Кунаева, 77').pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       if (data) {
         this.popularProductList = data;
       }

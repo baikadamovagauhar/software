@@ -24,16 +24,21 @@ export class MyCardComponent implements OnInit {
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   data: any;
+  baseUrl = 'http://77557883.ngrok.io/';
 
   constructor(private cardProductsService: CardProductsService) { }
 
   ngOnInit() {
-    this.cardProductsService.cart.subscribe((value) =>{
+    console.log(this.products);
+    this.cardProductsService.cart.subscribe((value) => {
       this.data = value;
-    })
+    });
+  }
+  get products() {
+    return JSON.parse(localStorage.getItem('cart'));
   }
 
-  close() {
+   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
   }

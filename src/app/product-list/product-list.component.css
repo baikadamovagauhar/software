@@ -1,0 +1,6 @@
+.banners {
+  display: flex;
+}
+.banners-img {
+  width: 500px;
+}

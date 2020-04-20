@@ -9,17 +9,20 @@ export class RequestService {
   constructor(private http: HttpClient) { }
   baseUrl = 'http://77557883.ngrok.io/';
 
-  getProduct(){
-    return this.http.get(`${this.baseUrl}/api/get-products`)
+  getProduct() {
+    return this.http.get(`${this.baseUrl}/api/get-products`);
   }
-  getCategory(){
+  getCategory() {
     // return this.http.get(this.baseUrl + 'api/get-categories');
-    return this.http.get(`${this.baseUrl}/api/get-categories`)
+    return this.http.get(`${this.baseUrl}/api/get-categories`);
   }
-  getPopularCategories(){
-    return this.http.get(`${this.baseUrl}/api/get-popular-categories`)
+  getPopularCategories() {
+    return this.http.get(`${this.baseUrl}/api/get-popular-categories`);
   }
-  getPopularProducts(){
-    return this.http.get(`${this.baseUrl}/api/get-popular-products`)
+  getPopularProducts(address) {
+    return this.http.get(`${this.baseUrl}/api/get-popular-products?address=` + address);
+  }
+  getProductByAddress(address) {
+    return this.http.get(`${this.baseUrl}/api/get-store-products?address=` + address);
   }
 }

@@ -19,6 +19,9 @@ html,head,body{
   width: 185px;
   height: 100px;
 }
+.logo:hover {
+  cursor: pointer;
+}
 .item {
   margin-right: 50px;
   font-size: 18px;

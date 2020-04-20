@@ -65,7 +65,7 @@
 <!--    <button class="btnPr">Хлеб</button>-->
 <!--  </div>-->
   <div class="popularProducts" >
-    <div class="ProductsList" *ngFor="let product of popularProductList">
+    <div class="ProductsList" *ngFor="let product of popularProductList; index as i">
       <div class="productContent">
         <img src="{{baseUrl}}/{{product.image}}" alt="title" class="content-image">
         <div class="product-info">
@@ -73,14 +73,14 @@
           <div class="product-price-details">
             <section class="price">
               <p class="block-caption">Цена</p>
-              <p class="price-txt">{{product.price * inputNum}} ₸</p>
+              <p class="price-txt">{{product.price * inputNum[i]}} ₸</p>
             </section>
             <div class="number">
-              <span class="minus" (click)="minus()">-</span>
-              <input type="text" value="{{inputNum}}" class="inp"/>
-              <span class="plus" (click)="plus()">+</span>
+              <span class="minus" (click)="minus(i)">-</span>
+              <input type="text" value="{{inputNum[i]}}" class="inp"/>
+              <span class="plus" (click)="plus(i)">+</span>
             </div>
-            <button class="addCard" (click)="addToCart(product)">В корзину</button>
+            <button class="addCard" (click)="addToCart(i)">В корзину</button>
           </div>
         </div>
       </div>
@@ -99,7 +99,7 @@
   </div>
 </div>
 
-<section class="aboutUs">
+<section class="aboutUs" #about>
   <img src="../../assets/images/about.jpg" alt="" class="aboutUsImg">
   <div class="aboutUsTxt">
     <p class="title1">Несколько слов о нашем магазине</p>

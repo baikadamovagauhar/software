@@ -16,6 +16,7 @@ import { SliderModule } from 'angular-image-slider';
 import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SlideshowModule} from 'ng-simple-slideshow';
+import { ProductListComponent } from './product-list/product-list.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {SlideshowModule} from 'ng-simple-slideshow';
         LoginComponent,
         MyCardComponent,
         MainContentComponent,
-        ProductCardComponent
+        ProductCardComponent,
+        ProductListComponent
     ],
   imports: [
     BrowserModule,

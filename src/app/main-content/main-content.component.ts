@@ -1,9 +1,10 @@
-import {Component, HostListener, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {RequestService} from '../request.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-main-content',
@@ -16,20 +17,30 @@ export class MainContentComponent implements OnInit, OnDestroy {
   categoryList = [];
   popularCategoryList = [];
   popularProductList = [];
+  storeProducts = [];
   imageUrlArray = [];
   banner = [];
   visibility = false;
-  inputNum = 1;
+  inputNum = [];
+  parametr = '';
 
   baseUrl = 'http://77557883.ngrok.io/';
-  constructor(private http: HttpClient, private requestService: RequestService, config: NgbCarouselConfig ) {
+  constructor(
+    private http: HttpClient,
+    private requestService: RequestService,
+    config: NgbCarouselConfig,
+    private activatedRoute: ActivatedRoute) {
     config.interval = 10000;
     config.wrap = false;
     config.keyboard = false;
     config.pauseOnHover = false;
   }
-
+  // @ViewChild('about') block: ElementRef;
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.parametr = params.scrollView;
+      // this.scroll(this.block);
+    });
     this.imageUrlArray = ['assets/images/slide-1.jpg', 'assets/images/slide-2.jpg', 'assets/images/slide-3.jpg'];
 
     this.requestService.getCategory().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
@@ -43,9 +54,17 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.banner = data.image;
       }
     });
-    this.requestService.getPopularProducts().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+    this.requestService.getPopularProducts('Алматы, улица Кунаева, 77').pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       if (data) {
         this.popularProductList = data;
+        this.popularProductList.forEach(el => {
+          this.inputNum.push(1);
+        });
+      }
+    });
+    this.requestService.getProductByAddress('Алматы, улица Кунаева, 77').pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+      if (data) {
+        this.storeProducts = data;
       }
     });
   }
@@ -64,12 +83,20 @@ export class MainContentComponent implements OnInit, OnDestroy {
       this.visibility = false;
     }
   }
-  addToCart(product) {}
-  minus() {
-    this.inputNum -= 1;
+  addToCart(index, product?) {
+    const arr = [];
+    arr.push(this.popularProductList[index]);
+    localStorage.setItem('cart', JSON.stringify(arr));
   }
-  plus() {
-    this.inputNum += 1;
+  minus(index: number) {
+    if (this.inputNum[index] > 1) {
+      this.inputNum[index] -= 1;
+    } else {
+      this.inputNum[index] = 1;
+    }
+  }
+  plus(index: number) {
+    this.inputNum[index] += 1;
   }
 
   ngOnDestroy(): void {
