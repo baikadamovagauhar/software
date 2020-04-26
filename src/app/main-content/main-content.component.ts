@@ -23,6 +23,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
   visibility = false;
   inputNum = [];
   parametr = '';
+  isInCart = [];
+  arr = [];
 
   baseUrl = 'http://4ebedc28.ngrok.io/';
   constructor(
@@ -59,6 +61,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.popularProductList = data;
         this.popularProductList.forEach(el => {
           this.inputNum.push(1);
+          this.isInCart.push('Добавить');
         });
       }
     });
@@ -84,9 +87,12 @@ export class MainContentComponent implements OnInit, OnDestroy {
     }
   }
   addToCart(index, product?) {
-    const arr = [];
-    arr.push(this.popularProductList[index]);
-    localStorage.setItem('cart', JSON.stringify(arr));
+    const a = {amount: this.inputNum[index]};
+    const merged = Object.assign(this.popularProductList[index], a);
+    this.isInCart[index] = 'Добавлено';
+    this.arr.push(merged);
+    localStorage.setItem('cart', JSON.stringify(this.arr));
+
   }
   minus(index: number) {
     if (this.inputNum[index] > 1) {
