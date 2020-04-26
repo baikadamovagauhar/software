@@ -7,7 +7,7 @@ import {takeUntil} from 'rxjs/operators';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit,OnDestroy {
+export class ProductListComponent implements OnInit {
   categories = [];
   unsub$: any;
 
@@ -18,9 +18,4 @@ export class ProductListComponent implements OnInit,OnDestroy {
       this.categories = data;
     });
   }
-  ngOnDestroy(): void {
-    this.unsub$.next();
-    this.unsub$.complete();
-  }
-
 }

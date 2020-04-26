@@ -24,7 +24,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   inputNum = [];
   parametr = '';
 
-  baseUrl = 'http://bb77fa9c.ngrok.io/';
+  baseUrl = 'http://4ebedc28.ngrok.io/';
   constructor(
     private http: HttpClient,
     private requestService: RequestService,
