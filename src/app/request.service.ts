@@ -28,4 +28,7 @@ export class RequestService {
   getProductByAddress(address) {
     return this.http.get(`${this.baseUrl}/api/get-store-products?address=` + address);
   }
+  getShopList() {
+    return this.http.get(`${this.baseUrl}/api/stores`);
+  }
 }

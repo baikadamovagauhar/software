@@ -37,6 +37,6 @@ export class PartnersComponent implements OnInit {
       this.parametr = params.scrollView;
       // this.scroll(this.block);
     });
-    this.imageUrlArray = ['assets/images/slide-1.jpg', 'assets/images/slide-2.jpg', 'assets/images/slide-3.jpg'];
+    this.imageUrlArray = ['assets/images/prt1.jpg', 'assets/images/prt2.png', 'assets/images/prt3.png'];
   }
 }
