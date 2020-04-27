@@ -90,7 +90,7 @@
 <h2 class="pop-txt"><i>Популярные категории</i></h2>
 <div class="popularCategory" >
   <div class="categories" *ngFor="let category of popularCategoryList">
-    <div class="categoryBox">
+    <div class="categoryBox" routerLink="/products" [queryParams]="{ctg: category.slug}">
       <img src="{{baseUrl}}/{{category.image}}" alt="title" class="categoryImages">
       <div class="overlay">
         <p class="text">{{category.title}}</p>

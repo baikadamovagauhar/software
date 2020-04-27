@@ -1,7 +1,51 @@
 <div class="container">
-  <p>Самая быстрая доставка продуктов на дом!</p>
+  <p class="banner-title">Самая быстрая доставка продуктов на дом!</p>
   <div class="banners">
     <img src="../../assets/images/delivery.jpg" alt="" class="banners-img">
     <img src="../../assets/images/ban.png" alt="" class="banners-img">
   </div>
+  <div class="filter-bar">
+    <label class="search">
+      <img
+        src="../../../assets/images/search-icon.png"
+        alt=""
+        class="search__logo"
+      >
+      <input
+        type="text"
+        placeholder="Search"
+        class="search__field"
+      >
+    </label>
+  </div>
+  <section class="product-main">
+  <div class="categories">
+    <p class="category-title" routerLink="/products">Все категории</p>
+    <ul class="categories-list" *ngFor="let cat of categories; index as i">
+      <li class="cat-name" routerLink="/products" [queryParams]="{ctg: cat.slug}">{{cat.title}}</li>
+    </ul>
+  </div>
+  <div class="popularProducts" >
+    <div class="ProductsList" *ngFor="let product of products; index as i">
+      <div class="productContent">
+        <img src="{{baseUrl}}/{{product.image}}" alt="title" class="content-image">
+        <div class="product-info">
+          <p class="product-title">{{product.title}}</p>
+          <div class="product-price-details">
+            <section class="price">
+              <p class="block-caption">Цена</p>
+              <p class="price-txt">{{product.price * inputNum[i]}} ₸</p>
+            </section>
+            <div class="number">
+              <span class="minus" (click)="minus(i)">-</span>
+              <input type="text" value="{{inputNum[i]}}" class="inp"/>
+              <span class="plus" (click)="plus(i)">+</span>
+            </div>
+            <button class="addCard" (click)="addToCart(i)">{{isInCart[i]}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
 </div>

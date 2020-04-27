@@ -87,12 +87,18 @@ export class MainContentComponent implements OnInit, OnDestroy {
     }
   }
   addToCart(index, product?) {
+    this.arr = [];
     const a = {amount: this.inputNum[index]};
     const merged = Object.assign(this.popularProductList[index], a);
     this.isInCart[index] = 'Добавлено';
     this.arr.push(merged);
-    localStorage.setItem('cart', JSON.stringify(this.arr));
-
+    let pr = [];
+    if (localStorage.getItem('cart')) {
+      pr = JSON.parse(localStorage.getItem('cart'));
+    }
+    let b = pr.concat(this.arr);
+    console.log(b);
+    localStorage.setItem('cart', JSON.stringify(b));
   }
   minus(index: number) {
     if (this.inputNum[index] > 1) {

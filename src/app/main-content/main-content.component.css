@@ -229,6 +229,9 @@
   display: flex;
   flex-direction: column;
 }
+.categoryBox:hover{
+  cursor: pointer;
+}
 
 .categoryImages{
   width: 300px;

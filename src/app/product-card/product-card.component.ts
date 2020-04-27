@@ -1,26 +1,16 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {RequestService} from "../request.service";
 import {take, takeUntil} from "rxjs/operators";
 import {CardProductsService} from "../card-products.service";
 
-class ProductToCard {
-  id: number;
-  title: string;
-  price: number;
-  barcode: number;
-  category_id: number;
-  constructor(...models: Partial<ProductToCard>[]) {
-    Object.assign(this,...models)
-  }
-}
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit,OnDestroy {
   unsub$ = new Subject();
   categoryList = [];
   popularCategoryList = [];
@@ -36,13 +26,13 @@ export class ProductCardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.requestService.getProduct().pipe(takeUntil(this.unsub$)).subscribe((data:any) =>{
-      if (data) {
-        this.products = data;
-        console.log(this.products);
-      }
-    });
-    this.requestService.getCategory().pipe(takeUntil(this.unsub$)).subscribe((data:any)=>{
+    // this.requestService.getProduct().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+    //   if (data) {
+    //     this.products = data;
+    //     console.log(this.products);
+    //   }
+    // });
+    this.requestService.getCategory().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       if (data) {
         this.categoryList = data;
       }
@@ -59,21 +49,6 @@ export class ProductCardComponent implements OnInit {
     });
   }
 
-  addToCart() {
-   const model: ProductToCard = new ProductToCard({
-     title: this.products.title,
-     price: this.products.price,
-     id: this.products.id,
-     barcode: this.products.barcode,
-     category_id: this.products.category_id
-   });
-   let productList: ProductToCard;
-   productList = new ProductToCard(model);
-   if (!this.isInCart) {
-     this.cardProductsService.getProducts(productList);
-
-   }
-  }
 
   ngOnDestroy(): void {
     this.unsub$.next();

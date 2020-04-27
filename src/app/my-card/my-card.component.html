@@ -2,21 +2,25 @@
   <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
   <div class="basket">
     <h3 class="titleBskt"><i>Моя корзина</i></h3>
+    <div class="scroll">
    <div class="basket-list" *ngFor="let product of products; index as i">
      <img src="{{baseUrl}}/{{product.image }}" alt="" class="pr-img">
      <div class="pr-info">
        <p class="pr-title">{{product.title}}</p>
        <div class="cnt">
          <div class="number">
-           <span class="minus">-</span>
-           <input type="text" value="1" class="inp"/>
-           <span class="plus">+</span>
+           <span class="minus" (click)="minus(i)">-</span>
+           <input type="text" value="{{product.amount}}" class="inp"/>
+           <span class="plus" (click)="plus(i)">+</span>
          </div>
          <p class="pr-price">{{product.price}} ₸</p>
        </div>
      </div>
    </div>
+    </div>
   </div>
+  <button class="goToCard" routerLink="/basket">Оформить заказ</button>
 </div>
+
 <div *ngIf="visible" class="overlay" (click)="close()"></div>
 

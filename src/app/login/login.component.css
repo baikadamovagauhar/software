@@ -24,7 +24,9 @@
 
 @media (min-width: 768px) {
   .dialog {
-    top: 70px;
+    position: absolute;
+    top: 100px;
+    right: 0;
   }
 }
 

@@ -17,6 +17,9 @@ import {NgbCarouselModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { ProductListComponent } from './product-list/product-list.component';
+import { PartnersComponent } from './partners/partners.component';
+import { MagazinyComponent } from './magaziny/magaziny.component';
+import { RozygrywComponent } from './rozygryw/rozygryw.component';
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import { ProductListComponent } from './product-list/product-list.component';
         MyCardComponent,
         MainContentComponent,
         ProductCardComponent,
-        ProductListComponent
+        ProductListComponent,
+        PartnersComponent,
+        MagazinyComponent,
+        RozygrywComponent
     ],
   imports: [
     BrowserModule,
@@ -40,7 +46,7 @@ import { ProductListComponent } from './product-list/product-list.component';
     SliderModule,
     NgbCarouselModule,
     NgbModule,
-    SlideshowModule,
+    SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]
