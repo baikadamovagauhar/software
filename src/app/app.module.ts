@@ -20,7 +20,9 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { PartnersComponent } from './partners/partners.component';
 import { MagazinyComponent } from './magaziny/magaziny.component';
 import { RozygrywComponent } from './rozygryw/rozygryw.component';
-
+import { AngularYandexMapsModule } from 'angular8-yandex-maps';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { DeliveryMapComponent } from './delivery-map/delivery-map.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +37,8 @@ import { RozygrywComponent } from './rozygryw/rozygryw.component';
         ProductListComponent,
         PartnersComponent,
         MagazinyComponent,
-        RozygrywComponent
+        RozygrywComponent,
+        DeliveryMapComponent
     ],
   imports: [
     BrowserModule,
@@ -46,7 +49,9 @@ import { RozygrywComponent } from './rozygryw/rozygryw.component';
     SliderModule,
     NgbCarouselModule,
     NgbModule,
-    SlideshowModule
+    SlideshowModule,
+    AngularYandexMapsModule.forRoot('9902bad3-29e4-4e16-875a-0d9611ad6ba5'),
+    Ng2SearchPipeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

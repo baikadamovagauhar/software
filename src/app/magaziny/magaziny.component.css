@@ -1,0 +1,56 @@
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.title-shop {
+  font-size: 25px;
+  color: #2c2c2c;
+  font-weight: bold;
+  text-align: center;
+  border-top: 1px solid;
+  padding-top: 20px;
+  margin-top: 0;
+}
+.shopList {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+.shop {
+  display: flex;
+  flex-direction: column;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  align-items: center;
+}
+.shop-img {
+  width: 350px;
+  height: 200px;
+}
+.address {
+  text-align: center;
+  color: #8e8e93;
+}
+.add-name {
+  color: #2c2c2c;
+}
+.shop-name {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+.container {
+  width: 1000px;
+  height: 500px;
+}
+.map {
+  display: flex;
+  justify-content: center;
+}

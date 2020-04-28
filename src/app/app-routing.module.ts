@@ -8,10 +8,12 @@ import {MainContentComponent} from './main-content/main-content.component';
 import {PartnersComponent} from './partners/partners.component';
 import {MagazinyComponent} from './magaziny/magaziny.component';
 import {RozygrywComponent} from './rozygryw/rozygryw.component';
+import {DeliveryMapComponent} from './delivery-map/delivery-map.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'main', pathMatch: 'full'},
+  { path: 'delivery', component: DeliveryMapComponent},
   { path: 'main', component: MainContentComponent },
   { path: 'basket', component: MyCardComponent},
   { path: 'products', component: ProductListComponent},

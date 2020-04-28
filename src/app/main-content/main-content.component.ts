@@ -39,6 +39,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
   // @ViewChild('about') block: ElementRef;
   ngOnInit() {
+    // if (localStorage)
     this.activatedRoute.queryParams.subscribe(params => {
       this.parametr = params.scrollView;
       // this.scroll(this.block);

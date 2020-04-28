@@ -20,6 +20,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   isInCart = [];
   arr = [];
   pr = [];
+  searchText: string;
 
   constructor(private requestService: RequestService, private route: ActivatedRoute) {
     this.querySubscription = route.queryParams.subscribe(

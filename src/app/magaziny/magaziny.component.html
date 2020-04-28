@@ -1,1 +1,26 @@
-<p>magaziny works!</p>
+<p class="title-shop">Список наших магазинов</p>
+<section class="main">
+  <div class="shopList" *ngFor="let item of shopList, index as i">
+    <div class="shop">
+      <img src="{{baseUrl}}{{item.image}}" alt="" class="shop-img">
+      <div class="info">
+        <p class="shop-name">{{item.title}}</p>
+        <p class="address">Находится: <span class="add-name">{{item.address}}</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="map">
+  <div class="container">
+    <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
+      <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters"></angular-yandex-control>
+      <angular-yandex-placemark
+        *ngFor="let item of shopList"
+        [geometry]="[item.lat, item.lng]"
+        [properties]="placemarkProperties"
+        [options]="placemarkOptions"
+      ></angular-yandex-placemark>
+    </angular-yandex-map>
+  </div>
+</section>
+

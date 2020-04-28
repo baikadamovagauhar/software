@@ -1,0 +1,16 @@
+<p class="map-title">Выберите адрес доставки: </p>
+<section class="map">
+  <div class="container">
+    <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
+      <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters" ></angular-yandex-control>
+      <angular-yandex-placemark
+        *ngFor="let item of shopList"
+        [geometry]="[item.lat, item.lng]"
+        [properties]="placemarkProperties"
+        [options]="placemarkOptions"
+      ></angular-yandex-placemark>
+    </angular-yandex-map>
+  </div>
+  <button class="continueBtn">Продолжить</button>
+</section>
+

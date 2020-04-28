@@ -15,18 +15,19 @@
         type="text"
         placeholder="Search"
         class="search__field"
+        [(ngModel)]="searchText"
       >
     </label>
   </div>
   <section class="product-main">
   <div class="categories">
     <p class="category-title" routerLink="/products">Все категории</p>
-    <ul class="categories-list" *ngFor="let cat of categories; index as i">
+    <ul class="categories-list" *ngFor="let cat of categories">
       <li class="cat-name" routerLink="/products" [queryParams]="{ctg: cat.slug}">{{cat.title}}</li>
     </ul>
   </div>
   <div class="popularProducts" >
-    <div class="ProductsList" *ngFor="let product of products; index as i">
+    <div class="ProductsList" *ngFor="let product of products | filter: searchText; index as i">
       <div class="productContent">
         <img src="{{baseUrl}}/{{product.image}}" alt="title" class="content-image">
         <div class="product-info">
