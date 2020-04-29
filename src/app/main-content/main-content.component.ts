@@ -31,7 +31,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
     private http: HttpClient,
     private requestService: RequestService,
     config: NgbCarouselConfig,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private route: Router) {
     config.interval = 10000;
     config.wrap = false;
     config.keyboard = false;
@@ -39,7 +40,9 @@ export class MainContentComponent implements OnInit, OnDestroy {
   }
   // @ViewChild('about') block: ElementRef;
   ngOnInit() {
-    // if (localStorage)
+    if (!localStorage.getItem('address')) {
+      this.route.navigate(['/delivery']);
+    }
     this.activatedRoute.queryParams.subscribe(params => {
       this.parametr = params.scrollView;
       // this.scroll(this.block);
@@ -57,7 +60,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.banner = data.image;
       }
     });
-    this.requestService.getPopularProducts('Алматы, улица Кунаева, 77').pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+    this.requestService.getPopularProducts(JSON.stringify(localStorage.getItem('address')))
+      .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       if (data) {
         this.popularProductList = data;
         this.popularProductList.forEach(el => {
@@ -66,7 +70,8 @@ export class MainContentComponent implements OnInit, OnDestroy {
         });
       }
     });
-    this.requestService.getProductByAddress('Алматы, улица Кунаева, 77').pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+    this.requestService.getProductByAddress(JSON.stringify(localStorage.getItem('address')))
+      .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       if (data) {
         this.storeProducts = data;
       }

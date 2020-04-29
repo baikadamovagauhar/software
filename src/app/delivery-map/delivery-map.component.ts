@@ -3,6 +3,9 @@ import {RequestService} from '../request.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {ILoadEvent} from 'angular8-yandex-maps';
+import {YandexGeoObjectComponent} from 'angular8-yandex-maps/lib/components/yandex-geoobject-component/yandex-geoobject.component';
+import {Router} from '@angular/router';
+import {log} from 'util';
 declare var ymaps: any;
 
 @Component({
@@ -12,8 +15,8 @@ declare var ymaps: any;
 })
 export class DeliveryMapComponent implements OnInit, OnDestroy {
   public placemarkProperties = {
-    hintContent: 'Hint content',
-    balloonContent: 'Baloon content'
+    hintContent: 'EzShop',
+    balloonContent: 'Our shop'
   };
   public placemarkOptions = {
     iconLayout: 'default#image',
@@ -29,9 +32,11 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
       }
     }
   };
+  address: string;
   shopList = [];
+  myMap: any;
   unsub$ = new Subject();
-  constructor(private requestService: RequestService) { }
+  constructor(private requestService: RequestService, private route: Router) {}
   ngOnInit() {
     this.requestService.getShopList().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       this.shopList = data;
@@ -41,16 +46,8 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
     this.unsub$.next();
     this.unsub$.complete();
   }
-  // var searchControl = new ymaps.control.SearchControl({
-  //   options: {
-  //     provider: 'yandex#search'
-  //   }
-  // });
-  // var result = searchControl.getResult(0);
-  // result.then(function (res) {
-  //   console.log("Results " + res );
-  // }, function (err) {
-  //   console.log("Error");
-  // });
-
+  click() {
+    localStorage.setItem('address', 'Алматы, ' + this.address);
+    this.route.navigate(['/main']);
+  }
 }

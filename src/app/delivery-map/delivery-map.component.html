@@ -1,6 +1,10 @@
-<p class="map-title">Выберите адрес доставки: </p>
 <section class="map">
+  <div>
+    <p class="map-title">Введите адрес доставки: </p>
+    <input type="text" [(ngModel)]="address" id="address_input" class="input-group-sm">
+  </div>
   <div class="container">
+    <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса</p>
     <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
       <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters" ></angular-yandex-control>
       <angular-yandex-placemark
@@ -11,6 +15,5 @@
       ></angular-yandex-placemark>
     </angular-yandex-map>
   </div>
-  <button class="continueBtn">Продолжить</button>
+  <button class="continueBtn" (click)="click()">Продолжить</button>
 </section>
-
