@@ -32,14 +32,44 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
       }
     }
   };
+  feature = null;
+  public options = {
+    fillColor: '#7df9ff33',
+    fillOpacity: 1,
+    strokeColor: '#0000FF',
+    strokeOpacity: 0.5,
+    strokeWidth: 2,
+    borderRadius: 6
+  };
   address: string;
   shopList = [];
+  shopCoords = [];
   myMap: any;
   unsub$ = new Subject();
   constructor(private requestService: RequestService, private route: Router) {}
   ngOnInit() {
     this.requestService.getShopList().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       this.shopList = data;
+      let maxLat = Math.max.apply(Math, data.map((o) => o.lat));
+      let maxLng = Math.max.apply(Math, data.map((o) => o.lng));
+      let temp = [];
+      temp.push(maxLat + 0.01);
+      temp.push(maxLng + 0.01);
+      let minLat = Math.min.apply(Math, data.map((o) => o.lat));
+      let minLng = Math.min.apply(Math, data.map((o) => o.lng));
+      let temp2 = [];
+      temp2.push(minLat - 0.01);
+      temp2.push(minLng - 0.01);
+      this.shopCoords.push(temp);
+      this.shopCoords.push(temp2);
+      this.feature = {
+        geometry: {
+          type: 'Rectangle',
+          coordinates: this.shopCoords
+        }
+      };
+      // this.feature.geometry.coordinates = this.shopCoords;
+      console.log(JSON.stringify(this.feature));
     });
   }
   ngOnDestroy(): void {

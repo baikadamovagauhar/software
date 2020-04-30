@@ -1,4 +1,4 @@
-<section class="map">
+<section class="map" *ngIf="feature!==null">
   <div>
     <p class="map-title">Введите адрес доставки: </p>
     <input type="text" [(ngModel)]="address" id="address_input" class="input-group-sm">
@@ -7,6 +7,10 @@
     <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса</p>
     <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
       <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters" ></angular-yandex-control>
+      <angular-yandex-geoobject
+        [feature]="feature"
+        [options]="options"
+      ></angular-yandex-geoobject>
       <angular-yandex-placemark
         *ngFor="let item of shopList"
         [geometry]="[item.lat, item.lng]"

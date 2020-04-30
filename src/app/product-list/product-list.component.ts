@@ -14,7 +14,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
   products = [];
   unsub$ = new Subject();
   private querySubscription: Subscription;
-  baseUrl = 'http://7567a78b.ngrok.io/';
+  baseUrl = 'http://d6033da0.ngrok.io/';
   category: any = null;
   inputNum = [];
   isInCart = [];

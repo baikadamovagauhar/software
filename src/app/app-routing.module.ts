@@ -9,6 +9,7 @@ import {PartnersComponent} from './partners/partners.component';
 import {MagazinyComponent} from './magaziny/magaziny.component';
 import {RozygrywComponent} from './rozygryw/rozygryw.component';
 import {DeliveryMapComponent} from './delivery-map/delivery-map.component';
+import {RegistrationComponent} from './registration/registration.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   { path: 'basket', component: MyCardComponent},
   { path: 'partners', component: PartnersComponent},
   { path: 'shopList', component: MagazinyComponent},
-  { path: 'lotery', component: RozygrywComponent}
+  { path: 'lotery', component: RozygrywComponent},
+  { path: 'registration', component: RegistrationComponent}
   ];
 
 @NgModule({

@@ -11,9 +11,9 @@
 .dialog {
   z-index: 1000;
   position: fixed;
-  right: 0;
-  left: 1020px;
-  top: 20px;
+  right: 5px;
+  /* left: 0; */
+  top: 100px;
   min-height: 300px;
   width: 90%;
   max-width: 300px;

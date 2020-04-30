@@ -1,5 +1,18 @@
 <div [@dialog] *ngIf="visible" class="dialog">
   <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
-  <p class="">Мой профиль</p>
+  <section *ngIf="authorized" class="user-profile">
+    <p class="">Мой профиль</p>
+    <img src="../../assets/images/user_icon.png" class="user-image" alt="user_icon">
+    <p class="username">{{user.username}} </p>
+    <p class="user-email">Почта: {{user.email}}</p>
+    <p class="user-bonuses">Ваши бонусы: {{user.bonuses}}</p>
+  </section>
+  <section *ngIf="!authorized">
+    <p class="user-login-text">Вход на сайт</p>
+    <input type="text" [(ngModel)]="username" class="user-login">
+    <input type="password" [(ngModel)]="password" class="user-password">
+    <button class="btn btn-success" (click)="login()">Войти</button>
+    <p class="register-text">Если у вас нету аккаунта, <span routerLink="/registration" class="registration-form">зарегистрируйтесь</span></p>
+  </section>
 </div>
 <div *ngIf="visible" class="overlay" (click)="close()"></div>

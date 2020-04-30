@@ -17,7 +17,7 @@ export class ProductCardComponent implements OnInit,OnDestroy {
   popularProductList = [];
   products: any;
   isInCart = false;
-  baseUrl = 'http://7567a78b.ngrok.io/';
+  baseUrl = 'http://d6033da0.ngrok.io/';
 
   constructor(
     private http: HttpClient,

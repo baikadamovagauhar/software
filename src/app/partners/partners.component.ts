@@ -21,7 +21,7 @@ export class PartnersComponent implements OnInit {
   parametr = '';
   isInCart = [];
 
-  baseUrl = 'http://7567a78b.ngrok.io/';
+  baseUrl = 'http://d6033da0.ngrok.io/';
   constructor(
     private http: HttpClient,
     private requestService: RequestService,

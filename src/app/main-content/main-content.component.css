@@ -92,12 +92,12 @@
 }
 .block1 {
   display: flex;
+  justify-content: space-between;
 }
 .bn-img {
   height: 320px;
-  width: 420px;
+  width: 400px;
   margin-bottom: 10px;
-  margin-right: 10px;
 }
 
 .popular {

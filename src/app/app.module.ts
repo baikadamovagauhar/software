@@ -23,6 +23,12 @@ import { RozygrywComponent } from './rozygryw/rozygryw.component';
 import { AngularYandexMapsModule } from 'angular8-yandex-maps';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { DeliveryMapComponent } from './delivery-map/delivery-map.component';
+import { RegistrationComponent } from './registration/registration.component';
+import {IConfig, NgxMaskModule} from 'ngx-mask';
+
+const maskConfig: Partial<IConfig> = {
+  validation: true,
+};
 
 @NgModule({
     declarations: [
@@ -38,7 +44,8 @@ import { DeliveryMapComponent } from './delivery-map/delivery-map.component';
         PartnersComponent,
         MagazinyComponent,
         RozygrywComponent,
-        DeliveryMapComponent
+        DeliveryMapComponent,
+        RegistrationComponent,
     ],
   imports: [
     BrowserModule,
@@ -51,7 +58,8 @@ import { DeliveryMapComponent } from './delivery-map/delivery-map.component';
     NgbModule,
     SlideshowModule,
     AngularYandexMapsModule.forRoot('9902bad3-29e4-4e16-875a-0d9611ad6ba5'),
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgxMaskModule.forRoot(maskConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

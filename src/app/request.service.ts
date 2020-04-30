@@ -7,7 +7,7 @@ import {HttpClient} from '@angular/common/http';
 export class RequestService {
 
   constructor(private http: HttpClient) { }
-  baseUrl = 'http://7567a78b.ngrok.io/';
+  baseUrl = 'http://d6033da0.ngrok.io/';
 
   getProduct(category) {
     if (category === null) {
@@ -30,5 +30,11 @@ export class RequestService {
   }
   getShopList() {
     return this.http.get(`${this.baseUrl}/api/stores`);
+  }
+  Login(login, password, address) {
+    return this.http.post(`${this.baseUrl}/api/login`, {login, password, address});
+  }
+  Registration(login, password, email, phone) {
+    return this.http.post(`${this.baseUrl}/api/registration`, {login, password, email, phone});
   }
 }
