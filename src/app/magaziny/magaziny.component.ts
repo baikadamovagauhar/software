@@ -12,7 +12,7 @@ import {ILoadEvent} from 'angular8-yandex-maps';
 export class MagazinyComponent implements OnInit, OnDestroy {
   unsub$ = new Subject();
   shopList = [];
-  baseUrl = 'http://4ebedc28.ngrok.io/';
+  baseUrl = 'http://7567a78b.ngrok.io/';
   public placemarkProperties = {
     hintContent: 'Hint content',
     balloonContent: 'Baloon content'

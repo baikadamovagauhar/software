@@ -26,7 +26,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   isInCart = [];
   arr = [];
 
-  baseUrl = 'http://4ebedc28.ngrok.io/';
+  baseUrl = 'http://7567a78b.ngrok.io/';
   constructor(
     private http: HttpClient,
     private requestService: RequestService,

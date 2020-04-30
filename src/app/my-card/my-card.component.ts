@@ -26,7 +26,7 @@ export class MyCardComponent implements OnInit {
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   item: any;
   data: any;
-  baseUrl = 'http://4ebedc28.ngrok.io/';
+  baseUrl = 'http://7567a78b.ngrok.io/';
 
   constructor(private cardProductsService: CardProductsService) { }
 
