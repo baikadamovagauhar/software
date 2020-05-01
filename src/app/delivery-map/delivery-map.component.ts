@@ -32,7 +32,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
       }
     }
   };
-  feature = null;
+  feature = [];
   public options = {
     fillColor: '#7df9ff33',
     fillOpacity: 1,
@@ -43,31 +43,26 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   };
   address: string;
   shopList = [];
-  shopCoords = [];
-  myMap: any;
   unsub$ = new Subject();
   constructor(private requestService: RequestService, private route: Router) {}
   ngOnInit() {
     this.requestService.getShopList().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
-      this.shopList = data;
-      let maxLat = Math.max.apply(Math, data.map((o) => o.lat));
-      let maxLng = Math.max.apply(Math, data.map((o) => o.lng));
-      let temp = [];
-      temp.push(maxLat + 0.01);
-      temp.push(maxLng + 0.01);
-      let minLat = Math.min.apply(Math, data.map((o) => o.lat));
-      let minLng = Math.min.apply(Math, data.map((o) => o.lng));
-      let temp2 = [];
-      temp2.push(minLat - 0.01);
-      temp2.push(minLng - 0.01);
-      this.shopCoords.push(temp);
-      this.shopCoords.push(temp2);
-      this.feature = {
-        geometry: {
-          type: 'Rectangle',
-          coordinates: this.shopCoords
-        }
-      };
+      data.forEach((el) => {
+        let temp = {
+          geometry: {
+            type: 'Rectangle',
+            coordinates: [
+              [el.lat + 0.01, el.lng + 0.01],
+              [el.lat - 0.01, el.lng - 0.01]
+            ]
+          },
+          properties: {
+            hintContent: 'Зона доставки',
+            balloonContent: el.title
+          }
+        };
+        this.feature.push(temp);
+      });
       // this.feature.geometry.coordinates = this.shopCoords;
       console.log(JSON.stringify(this.feature));
     });

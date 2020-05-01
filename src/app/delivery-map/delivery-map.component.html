@@ -7,16 +7,16 @@
     <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса</p>
     <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
       <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters" ></angular-yandex-control>
-      <angular-yandex-geoobject
-        [feature]="feature"
-        [options]="options"
-      ></angular-yandex-geoobject>
       <angular-yandex-placemark
         *ngFor="let item of shopList"
         [geometry]="[item.lat, item.lng]"
         [properties]="placemarkProperties"
         [options]="placemarkOptions"
       ></angular-yandex-placemark>
+      <angular-yandex-geoobject *ngFor="let store of feature"
+        [feature]="store"
+        [options]="options"
+      ></angular-yandex-geoobject>
     </angular-yandex-map>
   </div>
   <button class="continueBtn" (click)="click()">Продолжить</button>
