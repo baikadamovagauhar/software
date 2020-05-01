@@ -4,8 +4,8 @@
     <input type="text" [(ngModel)]="address" id="address_input" class="input-group-sm">
   </div>
   <div class="container">
-    <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса</p>
-    <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6" (load)="onLoad($event)">
+    <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса и проверьки зоны доставки</p>
+    <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6">
       <angular-yandex-control [type]="'SearchControl'" [parameters]="parameters" ></angular-yandex-control>
       <angular-yandex-placemark
         *ngFor="let item of shopList"
