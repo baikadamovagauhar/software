@@ -43,5 +43,6 @@
   align-items: center;
 }
 .input-group-sm {
-  width: 350px;
+  width: 450px;
+  padding: 8px;
 }

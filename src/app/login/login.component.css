@@ -41,3 +41,8 @@
   cursor: pointer;
   font-weight: bold;
 }
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
