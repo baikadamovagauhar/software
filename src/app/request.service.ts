@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService {
 
-  constructor(private http: HttpClient) { }
+export class RequestService {
+  constructor(private http: HttpClient) {}
+  const HttpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: 'Basic ' + btoa(localStorage.getItem('user'))
+    })
+  };
   baseUrl = 'http://d6033da0.ngrok.io/';
 
   getProduct(category) {
@@ -36,5 +42,8 @@ export class RequestService {
   }
   Registration(login, password, email, phone) {
     return this.http.post(`${this.baseUrl}/api/registration`, {login, password, email, phone});
+  }
+  MakeOrder(products, storeId, total, isCard, address) {
+    return this.http.post(`${this.baseUrl}/api/make-order`, {products, storeId, total, isCard, address}, this.HttpOptions);
   }
 }

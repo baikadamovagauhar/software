@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.requestService.Login(this.username, this.password, localStorage.getItem('address'))
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
         this.user = data;
+        localStorage.setItem('user', this.username + ':' + this.password);
     });
   }
   close() {
