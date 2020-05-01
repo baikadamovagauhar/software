@@ -7,6 +7,10 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 599;
 }
+.overlay:hover {
+  cursor: pointer;
+  outline: none;
+}
 
 .dialog {
   z-index: 1000;
@@ -46,5 +50,29 @@
   flex-direction: column;
 }
 .user-login-text {
-
+  font-size: 18px;
+  font-weight: bold;
+}
+.user-login {
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+.user-password {
+  margin-bottom: 25px;
+}
+.btn btn-success {
+  border-radius: 8px;
+  font-weight: bold;
+}
+.register-text {
+  font-size: 12px;
+  margin-top: 36px;
+  text-align: center;
+}
+.registration-form {
+  color: rebeccapurple;
+  cursor: pointer;
+}
+.registration-form:hover {
+  text-decoration: underline;
 }
