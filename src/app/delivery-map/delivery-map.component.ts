@@ -33,6 +33,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
     }
   };
   feature = [];
+  deliveryAddress: any;
   public options = {
     fillColor: '#7df9ff33',
     fillOpacity: 1,
@@ -44,6 +45,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   address: string;
   shopList = [];
   ymaps: any;
+  isInArea = false;
   unsub$ = new Subject();
   constructor(private requestService: RequestService, private route: Router) {}
   public onLoad(event: ILoadEvent) {
@@ -79,11 +81,25 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   click() {
     this.ymaps.geocode('Алматы, ' + this.address)
       .then((res) => {
-        console.log(
-          res.geoObjects.get(0).properties.get('metaDataProperty')
-        );
+        this.deliveryAddress = res.geoObjects.get(0).properties.get('boundedBy');
+        this.feature.forEach((el) => {
+          let keepGoing = true;
+          if (keepGoing) {
+            if (el.geometry.coordinates[0][0] > this.deliveryAddress[0][0]
+              && el.geometry.coordinates[0][1] > this.deliveryAddress[0][1]) {
+              if (el.geometry.coordinates[1][0] < this.deliveryAddress[1][0]
+                && el.geometry.coordinates[1][1] < this.deliveryAddress[1][1]) {
+                this.isInArea = true;
+                keepGoing = false;
+              }
+            }
+          }
+        });
+        console.log(this.isInArea);
+        if (this.isInArea) {
+          localStorage.setItem('address', 'Алматы, ' + this.address);
+          this.route.navigate(['/main']);
+        }
       });
-    // localStorage.setItem('address', 'Алматы, ' + this.address);
-    // this.route.navigate(['/main']);
   }
 }
