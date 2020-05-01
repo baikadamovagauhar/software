@@ -43,8 +43,13 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   };
   address: string;
   shopList = [];
+  ymaps: any;
   unsub$ = new Subject();
   constructor(private requestService: RequestService, private route: Router) {}
+  public onLoad(event: ILoadEvent) {
+    this.ymaps = event.ymaps;
+    console.log(ymaps.event);
+  }
   ngOnInit() {
     this.requestService.getShopList().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       data.forEach((el) => {
@@ -72,7 +77,13 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
     this.unsub$.complete();
   }
   click() {
-    localStorage.setItem('address', 'Алматы, ' + this.address);
-    this.route.navigate(['/main']);
+    this.ymaps.geocode('Алматы, ' + this.address)
+      .then((res) => {
+        console.log(
+          res.geoObjects.get(0).properties.get('metaDataProperty')
+        );
+      });
+    // localStorage.setItem('address', 'Алматы, ' + this.address);
+    // this.route.navigate(['/main']);
   }
 }
