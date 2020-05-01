@@ -80,28 +80,30 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
     this.unsub$.complete();
   }
   click() {
-    this.ymaps.geocode('Алматы, ' + this.address)
-      .then((res) => {
-        this.deliveryAddress = res.geoObjects.get(0).properties.get('boundedBy');
-        this.feature.forEach((el) => {
-          let keepGoing = true;
-          if (keepGoing) {
-            if (el.geometry.coordinates[0][0] > this.deliveryAddress[0][0]
-              && el.geometry.coordinates[0][1] > this.deliveryAddress[0][1]) {
-              if (el.geometry.coordinates[1][0] < this.deliveryAddress[1][0]
-                && el.geometry.coordinates[1][1] < this.deliveryAddress[1][1]) {
-                this.isInArea = true;
-                keepGoing = false;
+    if (this.address) {
+      this.ymaps.geocode('Алматы, ' + this.address)
+        .then((res) => {
+          this.deliveryAddress = res.geoObjects.get(0).properties.get('boundedBy');
+          this.feature.forEach((el) => {
+            let keepGoing = true;
+            if (keepGoing) {
+              if (el.geometry.coordinates[0][0] > this.deliveryAddress[0][0]
+                && el.geometry.coordinates[0][1] > this.deliveryAddress[0][1]) {
+                if (el.geometry.coordinates[1][0] < this.deliveryAddress[1][0]
+                  && el.geometry.coordinates[1][1] < this.deliveryAddress[1][1]) {
+                  this.isInArea = true;
+                  keepGoing = false;
+                }
               }
             }
+          });
+          console.log(this.isInArea);
+          this.isClicked = true;
+          if (this.isInArea) {
+            localStorage.setItem('address', 'Алматы, ' + this.address);
+            this.route.navigate(['/main']);
           }
         });
-        console.log(this.isInArea);
-        this.isClicked = true;
-        if (this.isInArea) {
-          localStorage.setItem('address', 'Алматы, ' + this.address);
-          this.route.navigate(['/main']);
-        }
-      });
+    }
   }
 }
