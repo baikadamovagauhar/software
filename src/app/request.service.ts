@@ -7,7 +7,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 export class RequestService {
   constructor(private http: HttpClient) {}
-  const HttpOptions = {
+  public HttpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
       Authorization: 'Basic ' + btoa(localStorage.getItem('user'))
