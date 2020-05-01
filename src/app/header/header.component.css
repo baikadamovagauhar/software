@@ -6,7 +6,7 @@ html,head,body{
   width: 100%;
   display: flex;
   justify-content: center;
-  max-width: 1257px !important;
+  max-width: 100% !important;
 }
 
 .header {
@@ -21,16 +21,19 @@ html,head,body{
 }
 .logo:hover {
   cursor: pointer;
+  outline: none;
 }
 .item {
   margin-right: 50px;
   font-size: 18px;
   color: #2c2c2c;
   font-weight: bold;
+  text-decoration: none;
 }
 .item:hover {
   color: #B22222 !important;
   cursor: pointer;
+  outline: none;
 }
 
 .sect3 {
@@ -46,4 +49,22 @@ html,head,body{
   cursor: pointer;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   border-radius: 8px;
+  outline: none;
+}
+.geoLocation {
+  display: flex;
+}
+.geo {
+  width: 40px;
+  height: 40px;
+}
+.address {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+  font-size: 15px;
+  color: darkblue;
+}
+.geoLocation:hover .address{
+  visibility: visible;
 }

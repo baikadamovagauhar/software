@@ -9,10 +9,10 @@
   </section>
   <section *ngIf="!authorized" class="profile">
     <p class="user-login-text">Вход на сайт</p>
-    <input type="text" [(ngModel)]="username" class="user-login">
-    <input type="password" [(ngModel)]="password" class="user-password">
+    <input type="text" [(ngModel)]="username" class="user-login" placeholder="Имя пользователя">
+    <input type="password" [(ngModel)]="password" class="user-password" placeholder="Пароль">
     <button class="btn btn-success" (click)="login()">Войти</button>
-    <p class="register-text">Если у вас нету аккаунта, <span routerLink="/registration" class="registration-form">зарегистрируйтесь</span></p>
+    <p class="register-text">Если у вас нету аккаунта, <span (click)="close()" routerLink="/registration" class="registration-form">зарегистрируйтесь</span></p>
   </section>
 </div>
 <div *ngIf="visible" class="overlay" (click)="close()"></div>

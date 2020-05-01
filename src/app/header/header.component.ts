@@ -9,10 +9,10 @@ import {Router} from '@angular/router';
 export class HeaderComponent implements OnInit {
   showDialog = false;
   showBasket = false;
-  constructor() {
-
-  }
+  address: string;
+  constructor() {}
     ngOnInit() {
+      this.address = localStorage.getItem('address');
   }
   route(el: HTMLElement) {
       el.scrollIntoView();

@@ -13,14 +13,10 @@
     </section>
 
     <section class="sect3">
-<!--      <label class="search">-->
-<!--        <img src="assets/images/search-icon.png" class="navlogo">-->
-<!--&lt;!&ndash;        <input&ndash;&gt;-->
-<!--&lt;!&ndash;          type="text"&ndash;&gt;-->
-<!--&lt;!&ndash;          placeholder="Искать ..."&ndash;&gt;-->
-<!--&lt;!&ndash;          class="sfield"&ndash;&gt;-->
-<!--&lt;!&ndash;        >&ndash;&gt;-->
-<!--      </label>-->
+      <div class="geoLocation">
+        <img src="../../assets/images/geo.png" class="navlogo" routerLink="/delivery">
+        <p class="address">{{address}}</p>
+      </div>
       <img src="assets/images/basket.png" class="navlogo" (click)="showDialog=!showDialog">
       <app-my-card [visible]="showDialog"></app-my-card>
       <img src="assets/images/user.png"  class="navlogo" (click)="showBasket=!showBasket">
