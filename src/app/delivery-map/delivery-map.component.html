@@ -3,6 +3,7 @@
     <p class="map-title">Введите адрес доставки: </p>
     <input type="text" [(ngModel)]="address" id="address_input" class="input-group-sm" placeholder="улица Кунаева, 77">
   </div>
+  <div class="alert" *ngIf="isInArea==false && isClicked">Адрес не входит в зону доставки!</div>
   <div class="container">
     <p class="hint">Воспользуйтесь картой для нахождение вашего точного адреса и проверьки зоны доставки</p>
     <angular-yandex-map [center]="[43.238293,76.945465]" [zoom]="11.6" (load)="onLoad($event)">

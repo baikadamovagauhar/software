@@ -45,6 +45,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   address: string;
   shopList = [];
   ymaps: any;
+  isClicked = false;
   isInArea = false;
   unsub$ = new Subject();
   constructor(private requestService: RequestService, private route: Router) {}
@@ -96,6 +97,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
           }
         });
         console.log(this.isInArea);
+        this.isClicked = true;
         if (this.isInArea) {
           localStorage.setItem('address', 'Алматы, ' + this.address);
           this.route.navigate(['/main']);
