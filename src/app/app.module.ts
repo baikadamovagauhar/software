@@ -9,7 +9,7 @@ import {LoginComponent} from './login/login.component';
 import { MyCardComponent } from './my-card/my-card.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import {HttpClientModule} from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { SliderModule } from 'angular-image-slider';
@@ -47,20 +47,21 @@ const maskConfig: Partial<IConfig> = {
         DeliveryMapComponent,
         RegistrationComponent,
     ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    SliderModule,
-    NgbCarouselModule,
-    NgbModule,
-    SlideshowModule,
-    AngularYandexMapsModule.forRoot('9902bad3-29e4-4e16-875a-0d9611ad6ba5'),
-    Ng2SearchPipeModule,
-    NgxMaskModule.forRoot(maskConfig)
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        SliderModule,
+        NgbCarouselModule,
+        NgbModule,
+        SlideshowModule,
+        AngularYandexMapsModule.forRoot('9902bad3-29e4-4e16-875a-0d9611ad6ba5'),
+        Ng2SearchPipeModule,
+        NgxMaskModule.forRoot(maskConfig),
+        ReactiveFormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

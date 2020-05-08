@@ -1,15 +1,19 @@
 <div class="main">
   <h2 class="main-title"><i>Регистрация</i></h2>
-  <section class="registration-form">
-    <label for="username-registration">Имя пользователя</label>
-    <input type="text" id="username-registration">
-    <label for="email-registration">Почта</label>
-    <input type="email" id="email-registration">
-    <label for="phone-registration">Номер телефона</label>
-    <input type="text" id="phone-registration" prefix="+7" mask="(999)9999999">
-    <label for="password-registration">Пароль</label>
-    <input type="password" id="password-registration">
-    <button class="btn btn-success">Зарегистрироваться</button>
-  </section>
+  <form [formGroup]="myForm">
+      <div class="form-group">
+          <section class="registration-form">
+          <label for="username-registration" class="lbl">Имя пользователя</label>
+          <input type="text" [(ngModel)]="username" id="username-registration" class="form-control" name="name" formControlName="userName">
+          <label for="email-registration" class="lbl">Почта</label>
+          <input type="email" [(ngModel)]="email" id="email-registration" class="form-control" name="email" formControlName="userEmail">
+          <label for="phone-registration" class="lbl">Номер телефона</label>
+          <input type="text" [(ngModel)]="phone" id="phone-registration" prefix="+7" mask="9999999999" class="form-control" name="phone" formControlName="userPhone">
+          <label for="password-registration" class="lbl">Пароль</label>
+          <input type="password" [(ngModel)]="password" id="password-registration" class="form-control" name="password" formControlName="userPass">
+          <button class="registr" [disabled]="myForm.invalid" (click)="register()" routerLink="/main">Зарегистрироваться</button>
+        </section>
+      </div>
+  </form>
 </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, OnChanges, EventEmitter, OnDestroy} from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {HttpClient} from '@angular/common/http';
 import {RequestService} from '../request.service';
@@ -21,17 +21,22 @@ import {Subject} from 'rxjs';
     ])
   ]
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   @Input() closable = true;
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
   authorized = false;
   user: any;
   username: any;
+  name: any;
+  bonus: any;
   password: any;
   unsub$ = new Subject();
   constructor(private http: HttpClient, private requestService: RequestService) { }
   ngOnInit() {
+    this.username = localStorage.getItem('userEmail');
+    this.name = localStorage.getItem('userName');
+    this.bonus = localStorage.getItem('bonus');
     localStorage.getItem('user') ? this.authorized = true : this.authorized = false;
     this.user = JSON.parse(localStorage.getItem('user'));
     console.log(this.authorized);
@@ -40,11 +45,23 @@ export class LoginComponent implements OnInit {
     this.requestService.Login(this.username, this.password, localStorage.getItem('address'))
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
         this.user = data;
-        localStorage.setItem('user', this.username + ':' + this.password);
+        if (data.success === true) {
+          localStorage.setItem('user', this.username + ':' + this.password);
+          localStorage.setItem('userName', data.username);
+          localStorage.setItem('userEmail', data.email);
+          localStorage.setItem('phone', data.phone_number);
+          localStorage.setItem('bonus', data.bonuses);
+          this.authorized = true;
+          // window.location.reload();
+        }
     });
   }
   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
+  }
+  ngOnDestroy(): void {
+    this.unsub$.next();
+    this.unsub$.complete();
   }
 }
