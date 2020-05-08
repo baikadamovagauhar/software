@@ -51,7 +51,11 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
   constructor(private requestService: RequestService, private route: Router) {}
   public onLoad(event: ILoadEvent) {
     this.ymaps = event.ymaps;
-    console.log(ymaps.event);
+    const searchControl = event.instance.controls.get(1);
+    searchControl.events.add(
+      ['submit'],
+      e => this.address = e.get('target').getRequestString()
+    );
   }
   ngOnInit() {
     this.requestService.getShopList().pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
@@ -100,7 +104,7 @@ export class DeliveryMapComponent implements OnInit, OnDestroy {
           console.log(this.isInArea);
           this.isClicked = true;
           if (this.isInArea) {
-            localStorage.setItem('address', 'Алматы, ' + this.address);
+            localStorage.setItem('address', res.geoObjects.get(0).properties.get('text'));
             this.route.navigate(['/main']);
           }
         });
