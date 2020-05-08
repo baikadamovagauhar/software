@@ -15,9 +15,8 @@
   flex-direction: column;
   background-color: white;
   border-radius: 8px;
-  padding: 16px 30px;
+  padding: 30px 16px 16px;
   margin-bottom: 98px;
-  width: 470px;
   height: 300px;
 }
 .lbl {
@@ -25,7 +24,6 @@
   font-size: 18px;
 }
 .inp {
-  width: 300px;
   margin-top: 11px;
   padding: 8px;
 }
@@ -41,6 +39,39 @@
 .registr:hover {
   cursor: pointer;
 }
-.input.ng-touched.ng-invalid{
-  border-color: red;
+
+.is-invalid {
+  border: 1px solid red;
+}
+.form-control {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #2c2c2c;
+  width: 300px  ;
+}
+.fc {
+  display: flex;
+  justify-content: center;
+  width: 250px;
+  margin-bottom: 10px;
+}
+.alreadyHave {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.alreadyHave_title {
+  text-align: center;
+  color: #B22222;
+  font-weight: bold;
+}
+.alreadyHave_title:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  color: #0F9E5E;
+}
+.invalid-feedback {
+  margin-top: 2px;
+  color: rebeccapurple;
+  font-weight: bold;
 }

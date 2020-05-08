@@ -11,12 +11,13 @@
   align-items: center;
 }
 .map-title {
-  margin-top: 5px;
+  margin-top: 16px;
   margin-left: 5px;
   text-align: center;
-  font-size: 20px;
+  font-size: 26px;
   font-weight: bold;
   color: #2c2c2c;
+  margin-bottom: 10px;
 }
 .alert{
   width: 420px;
@@ -39,9 +40,9 @@
   color: grey;
 }
 .continueBtn {
-  bottom: 0;
+  bottom: 10%;
   position: absolute;
-  right: 0;
+  right: 19%;
   border: none;
   padding: 8px;
   font-size: 18px;

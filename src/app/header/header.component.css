@@ -63,6 +63,8 @@ html,head,body{
   visibility: hidden;
   position: absolute;
   top: 0;
+  right: 0;
+  margin-right: 5px;
   font-size: 15px;
   color: darkblue;
 }

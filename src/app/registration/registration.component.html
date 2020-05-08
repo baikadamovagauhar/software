@@ -3,15 +3,41 @@
   <form [formGroup]="myForm">
       <div class="form-group">
           <section class="registration-form">
-          <label for="username-registration" class="lbl">Имя пользователя</label>
-          <input type="text" [(ngModel)]="username" id="username-registration" class="form-control" name="name" formControlName="userName">
-          <label for="email-registration" class="lbl">Почта</label>
-          <input type="email" [(ngModel)]="email" id="email-registration" class="form-control" name="email" formControlName="userEmail">
-          <label for="phone-registration" class="lbl">Номер телефона</label>
-          <input type="text" [(ngModel)]="phone" id="phone-registration" prefix="+7" mask="9999999999" class="form-control" name="phone" formControlName="userPhone">
-          <label for="password-registration" class="lbl">Пароль</label>
-          <input type="password" [(ngModel)]="password" id="password-registration" class="form-control" name="password" formControlName="userPass">
-          <button class="registr" [disabled]="myForm.invalid" (click)="register()" routerLink="/main">Зарегистрироваться</button>
+            <div class="fc">
+          <input type="text" [(ngModel)]="username" id="username-registration" class="form-control" name="name" formControlName="userName"
+                 [ngClass]="{'is-invalid': myForm.get('userName').errors && myForm.get('userName').touched}" placeholder="Имя пользователя">
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userName').touched && myForm.get('userName').hasError('required')">
+             Обязательное поле!
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userName').hasError('minlength') && myForm.get('userName').touched">
+              Должно быть минимум 3 символа! </div>
+            <div class="fc">
+          <input type="email" [(ngModel)]="email" id="email-registration" class="form-control" name="email" formControlName="userEmail"
+                 [ngClass]="{'is-invalid': myForm.get('userEmail').errors && myForm.get('userEmail').touched}" placeholder="Почта">
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userEmail').touched && myForm.get('userEmail').hasError('required')">
+              Обязательное поле!
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userEmail').hasError('pattern') && myForm.get('userEmail').touched">
+              Неверный email! </div>
+            <div class="fc">
+          <input type="text" [(ngModel)]="phone" id="phone-registration" prefix="+7" mask="9999999999" class="form-control" name="phone" formControlName="userPhone"
+                  placeholder="Номер телефона">
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userPhone').touched && myForm.get('userPhone').hasError('required')">
+              Обязательное поле!
+            </div>
+            <div class="fc">
+          <input type="password" [(ngModel)]="password" id="password-registration" class="form-control" name="password" formControlName="userPass"
+          placeholder="Пароль">
+            </div>
+            <div class="invalid-feedback" *ngIf="myForm.get('userPass').touched && myForm.get('userPass').hasError('required')">
+              Обязательное поле!
+            </div>
+          <button class="registr" [disabled]="myForm.invalid" (click)="register()">Зарегистрироваться</button>
+            <div class="alreadyHave">У вас уже есть аккаунт?</div>
+            <div class="alreadyHave_title">Войти</div>
         </section>
       </div>
   </form>
