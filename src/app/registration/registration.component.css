@@ -5,6 +5,7 @@
   justify-content: center;
   border-top:1px solid;
   background-color: #2c2c2c;
+  padding-bottom: 76px;
 }
 .main-title {
   color: white;
@@ -16,8 +17,6 @@
   background-color: white;
   border-radius: 8px;
   padding: 30px 16px 16px;
-  margin-bottom: 98px;
-  height: 300px;
 }
 .lbl {
   margin-top: 10px;

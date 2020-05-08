@@ -15,7 +15,9 @@ export class RequestService {
   };
   public Cors = {
     headers: new HttpHeaders( {
-      'Access-Control-Allow-Origin' : '*'
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods' : '*',
+      'Access-Control-Allow-Headers' : '*',
     })
   };
   baseUrl = 'http://d6033da0.ngrok.io/';

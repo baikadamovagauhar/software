@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 })
 export class RegistrationComponent implements OnInit, OnDestroy {
 
-  constructor(private requestService: RequestService,  private router: Router) { }
+  constructor(private requestService: RequestService,  private route: Router) { }
   username: any;
   email: any;
   password: any;
@@ -34,6 +34,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     this.requestService.Registration(this.username, this.password, this.email, this.phone)
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       this.newUser = data;
+      this.route.navigate(['/main']);
     });
   }
   ngOnDestroy(): void {
