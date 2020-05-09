@@ -28,8 +28,7 @@ export class MyCardComponent implements OnInit {
   item: any;
   data: any;
   address: string;
-  total: number;
-  productList: any;
+  total: any;
   checkoutOrder = false;
   baseUrl = 'http://d6033da0.ngrok.io/';
   checkForm: FormGroup = new FormGroup({
@@ -48,14 +47,18 @@ export class MyCardComponent implements OnInit {
 
   ngOnInit() {
     this.address = localStorage.getItem('address');
-    for (let i = 0; i < this.products.length; i++) {
-      this.total += this.products[i].price * this.products[i].amount;
-    }
+    this.getTotal();
   }
   get products() {
     return JSON.parse(localStorage.getItem('cart'));
   }
-
+  getTotal() {
+    this.total = 0;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.products.length; i++) {
+      this.total += parseInt(this.products[i].price, 10) * parseInt(this.products[i].amount, 10);
+    }
+  }
   minus(index: number) {
     if (this.products[index].amount > 0) {
       this.item = {
@@ -68,6 +71,7 @@ export class MyCardComponent implements OnInit {
       this.data[index] = this.item;
       console.log(this.data);
       localStorage.setItem('cart', JSON.stringify(this.data));
+      this.getTotal();
     }
   }
   plus(index: number) {
@@ -81,6 +85,7 @@ export class MyCardComponent implements OnInit {
     this.data[index] = this.item;
     console.log(this.data);
     localStorage.setItem('cart', JSON.stringify(this.data));
+    this.getTotal();
   }
   clear() {
     localStorage.removeItem('cart');

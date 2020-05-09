@@ -16,12 +16,12 @@
          <p class="pr-price">{{product.price * product.amount}} ₸</p>
        </div>
      </div>
-     <p>Итого {{total}}</p>
    </div>
     </div>
   </div>
-  <button class="clear" (click)="clear()">Очистить корзину</button>
-  <button class="goToCard" (click)="checkout()">{{checkoutOrder ? 'Скрыть' : 'Оформить заказ'}}</button>
+  <p *ngIf="products">Итого {{total}} ₸</p>
+  <button class="clear" (click)="clear()" *ngIf="products">Очистить корзину</button>
+  <button class="goToCard" (click)="checkout()" *ngIf="products">{{checkoutOrder ? 'Скрыть' : 'Оформить заказ'}}</button>
   <section *ngIf="checkoutOrder == true">
     <form [formGroup]="checkForm">
       <div class="form-group">
