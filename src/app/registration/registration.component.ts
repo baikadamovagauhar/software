@@ -10,8 +10,14 @@ import {Router} from '@angular/router';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+<<<<<<< HEAD
 export class RegistrationComponent implements OnDestroy {
   constructor(private requestService: RequestService,  private router: Router) { }
+=======
+export class RegistrationComponent implements OnInit, OnDestroy {
+
+  constructor(private requestService: RequestService,  private route: Router) { }
+>>>>>>> 1c5da895bba607e2ce40e5e8bbf6087011abd3b6
   username: any;
   email: any;
   password: any;
@@ -33,6 +39,7 @@ export class RegistrationComponent implements OnDestroy {
     this.requestService.Registration(this.username, this.password, this.email, this.phone)
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       this.newUser = data;
+<<<<<<< HEAD
       if (this.newUser === true) {
         this.reserved = true;
         this.router.navigate(['/main']);
@@ -41,6 +48,9 @@ export class RegistrationComponent implements OnDestroy {
       } else {
         console.log('Server Error 500');
       }
+=======
+      this.route.navigate(['/main']);
+>>>>>>> 1c5da895bba607e2ce40e5e8bbf6087011abd3b6
     });
   }
   ngOnDestroy(): void {

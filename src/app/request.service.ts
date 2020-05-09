@@ -15,7 +15,7 @@ export class RequestService {
   };
   public Cors = {
     headers: new HttpHeaders( {
-      'Access-Control-Allow-Origin' : '*'
+      'Access-Control-Allow-Origin' : '*',
     })
   };
   baseUrl = 'http://d6033da0.ngrok.io/';
@@ -46,7 +46,7 @@ export class RequestService {
     return this.http.post(`${this.baseUrl}/api/login`, {login, password, address});
   }
   Registration(login, password, email, phone) {
-    return this.http.post(`${this.baseUrl}/api/registration`, {login, password, email, phone}, this.Cors);
+    return this.http.post(`${this.baseUrl}/api/registration`, {login, password, email, phone});
   }
   MakeOrder(products, storeId, total, isCard, address) {
     return this.http.post(`${this.baseUrl}/api/make-order`, {products, storeId, total, isCard, address}, this.HttpOptions);
