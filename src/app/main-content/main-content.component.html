@@ -80,7 +80,7 @@
               <input type="text" value="{{inputNum[i]}}" class="inp"/>
               <span class="plus" (click)="plus(i)">+</span>
             </div>
-            <button class="addCard" (click)="addToCart(i)">{{isInCart[i]}}</button>
+            <button class="addCard" (click)="addToCart(i)" [disabled]="isInCart[i] === 'Добавлено'">{{isInCart[i]}}</button>
           </div>
         </div>
       </div>

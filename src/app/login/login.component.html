@@ -5,7 +5,8 @@
     <img src="../../assets/images/user_icon.png" class="user-image" alt="user_icon">
     <p class="username">{{name}} </p>
     <p class="user-email">Почта: {{username}}</p>
-    <p class="user-bonuses">Ваши бонусы: {{bonus}}</p>
+    <p class="user-bonuses">Ваши бонусы: {{bonus || 0}}</p>
+    <button class="logout" (click)="logout()">Выйти</button>
   </section>
   <section *ngIf="!authorized" class="profile">
     <p class="user-login-text">Вход на сайт</p>

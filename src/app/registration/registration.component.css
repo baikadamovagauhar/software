@@ -5,10 +5,12 @@
   justify-content: center;
   border-top:1px solid;
   background-color: #2c2c2c;
+  padding-top: 25px;
 }
 .main-title {
   color: white;
   font-size: 35px;
+  margin-bottom: 20px;
 }
 .registration-form {
   display: flex;
@@ -16,8 +18,7 @@
   background-color: white;
   border-radius: 8px;
   padding: 30px 16px 16px;
-  margin-bottom: 98px;
-  height: 300px;
+  margin-bottom: 103px;
 }
 .lbl {
   margin-top: 10px;
@@ -74,4 +75,9 @@
   margin-top: 2px;
   color: rebeccapurple;
   font-weight: bold;
+}
+.alert {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
 }

@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {RequestService} from '../request.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   bonus: any;
   password: any;
   unsub$ = new Subject();
-  constructor(private http: HttpClient, private requestService: RequestService) { }
+  constructor(private http: HttpClient, private requestService: RequestService, private route: Router) { }
   ngOnInit() {
     this.username = localStorage.getItem('userEmail');
     this.name = localStorage.getItem('userName');
@@ -45,16 +46,21 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.requestService.Login(this.username, this.password, localStorage.getItem('address'))
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
         this.user = data;
+        console.log(data.user);
         if (data.success === true) {
           localStorage.setItem('user', this.username + ':' + this.password);
-          localStorage.setItem('userName', data.username);
-          localStorage.setItem('userEmail', data.email);
-          localStorage.setItem('phone', data.phone_number);
-          localStorage.setItem('bonus', data.bonuses);
+          localStorage.setItem('userName', data.user.username);
+          localStorage.setItem('userEmail', data.user.email);
+          localStorage.setItem('phone', data.user.phone_number);
+          localStorage.setItem('bonus', data.user.bonuses);
           this.authorized = true;
           // window.location.reload();
         }
     });
+  }
+  logout() {
+    localStorage.clear();
+    window.location.reload();
   }
   close() {
     this.visible = false;

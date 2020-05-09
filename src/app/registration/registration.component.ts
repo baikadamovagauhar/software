@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {takeUntil} from 'rxjs/operators';
 import {RequestService} from '../request.service';
 import {Subject} from 'rxjs';
@@ -10,14 +10,14 @@ import {Router} from '@angular/router';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
-
+export class RegistrationComponent implements OnDestroy {
   constructor(private requestService: RequestService,  private router: Router) { }
   username: any;
   email: any;
   password: any;
   phone: any;
   newUser: any;
+  reserved = true;
   unsub$ = new Subject();
   myForm: FormGroup = new FormGroup({
     userName: new FormControl('', [Validators.required, Validators.minLength(3)]),
@@ -28,12 +28,19 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     userPass: new FormControl('', Validators.required),
     userPhone: new FormControl('', Validators.pattern('[0-9]{10}'))
   });
-  ngOnInit() {
-  }
+
   register() {
     this.requestService.Registration(this.username, this.password, this.email, this.phone)
       .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
       this.newUser = data;
+      if (this.newUser === true) {
+        this.reserved = true;
+        this.router.navigate(['/main']);
+      } else if (this.newUser === 23000) {
+        this.reserved = false;
+      } else {
+        console.log('Server Error 500');
+      }
     });
   }
   ngOnDestroy(): void {
