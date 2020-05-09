@@ -44,7 +44,6 @@ export class MyCardComponent implements OnInit {
     dom: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
     phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')])
   });
-  @Output() cartCleared = new EventEmitter();
   constructor(private cardProductsService: CardProductsService, private route: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {

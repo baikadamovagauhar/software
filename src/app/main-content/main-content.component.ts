@@ -82,9 +82,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
         for (let i = 0; i < this.inputNum.length; i++) {
           this.inputNum[i] = 1;
           this.isInCart[i] = 'Добавить';
-          console.log('here');
         }
-        console.log(this.inputNum);
       }
       this.route.navigate(
         [],
