@@ -17,10 +17,10 @@
         <img src="../../assets/images/geo.png" class="navlogo" routerLink="/delivery">
         <p class="address">{{address}}</p>
       </div>
-      <img src="assets/images/basket.png" class="navlogo" (click)="showDialog=!showDialog">
-      <app-my-card [visible]="showDialog"></app-my-card>
+      <img src="assets/images/basket.png" class="navlogo" (click)="toggleDialog()">
+      <app-my-card *ngIf="showDialog" [visible]="showDialog" (visibleChange)="toggleDialog()"></app-my-card>
       <img src="assets/images/user.png"  class="navlogo" (click)="showBasket=!showBasket">
-      <app-login [visible]="showBasket"></app-login>
+      <app-login [visible]="showBasket" (visibleChange)="toggleBasket()"></app-login>
     </section>
 </div>
 </div>

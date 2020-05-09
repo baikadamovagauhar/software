@@ -76,6 +76,23 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.storeProducts = data;
       }
     });
+    this.activatedRoute.queryParams.subscribe(params => {
+      let cleared = params.basket === 'clear';
+      if (cleared) {
+        for (let i = 0; i < this.inputNum.length; i++) {
+          this.inputNum[i] = 1;
+          this.isInCart[i] = 'Добавить';
+          console.log('here');
+        }
+        console.log(this.inputNum);
+      }
+      this.route.navigate(
+        [],
+        {
+          relativeTo: this.activatedRoute,
+          queryParams: {}
+        });
+    });
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();

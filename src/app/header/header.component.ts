@@ -17,5 +17,11 @@ export class HeaderComponent implements OnInit {
   route(el: HTMLElement) {
       el.scrollIntoView();
   }
+  toggleBasket() {
+    this.showBasket = !this.showBasket;
+  }
+  toggleDialog() {
+    this.showDialog = !this.showDialog;
+  }
 
 }

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {CardProductsService} from '../card-products.service';
-import {Observable} from 'rxjs';
+import {Observable, of, Subject} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-my-card',
@@ -30,6 +31,7 @@ export class MyCardComponent implements OnInit {
   address: string;
   total: any;
   checkoutOrder = false;
+  private storageSub = new Subject<string>();
   baseUrl = 'http://d6033da0.ngrok.io/';
   checkForm: FormGroup = new FormGroup({
     name: new FormControl('', [
@@ -42,22 +44,33 @@ export class MyCardComponent implements OnInit {
     dom: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
     phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')])
   });
-
-  constructor(private cardProductsService: CardProductsService) { }
+  @Output() cartCleared = new EventEmitter();
+  constructor(private cardProductsService: CardProductsService, private route: Router, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.address = localStorage.getItem('address');
-    this.getTotal();
+    this.total = this.getTotal();
+    this.watchStorage().subscribe((data) => {
+      if (data) {
+        this.total = this.getTotal();
+      }
+    });
+  }
+  watchStorage(): Observable<any> {
+    return this.storageSub.asObservable();
   }
   get products() {
     return JSON.parse(localStorage.getItem('cart'));
   }
   getTotal() {
-    this.total = 0;
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.products.length; i++) {
-      this.total += parseInt(this.products[i].price, 10) * parseInt(this.products[i].amount, 10);
+    let total = 0;
+    if (this.products) {
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < this.products.length; i++) {
+        total += parseInt(this.products[i].price, 10) * parseInt(this.products[i].amount, 10);
+      }
     }
+    return total;
   }
   minus(index: number) {
     if (this.products[index].amount > 0) {
@@ -71,8 +84,8 @@ export class MyCardComponent implements OnInit {
       this.data[index] = this.item;
       console.log(this.data);
       localStorage.setItem('cart', JSON.stringify(this.data));
-      this.getTotal();
     }
+    this.storageSub.next('true');
   }
   plus(index: number) {
     this.item = {
@@ -85,10 +98,18 @@ export class MyCardComponent implements OnInit {
     this.data[index] = this.item;
     console.log(this.data);
     localStorage.setItem('cart', JSON.stringify(this.data));
-    this.getTotal();
+    this.storageSub.next('true');
   }
   clear() {
     localStorage.removeItem('cart');
+    this.storageSub.next('true');
+    this.route.navigate(
+      [],
+      {
+        relativeTo: this.activeRoute,
+        queryParams: { basket: 'clear' },
+        queryParamsHandling: 'merge'
+      });
   }
   checkout() {
     if (localStorage.getItem('userName')) {
