@@ -34,7 +34,7 @@ export class MyCardComponent implements OnInit, OnDestroy {
   address: string;
   total: any;
   checkoutOrder = false;
-  isCard: any;
+  isCard = true;
   kvartira: number;
   dom: number;
   name: string;
@@ -45,6 +45,7 @@ export class MyCardComponent implements OnInit, OnDestroy {
   allBonus: any;
   success = false;
   login = true;
+  bns: number;
   private storageSub = new Subject<string>();
   baseUrl = 'http://e9661ac1.ngrok.io/';
   checkForm: FormGroup = new FormGroup({
@@ -149,8 +150,9 @@ export class MyCardComponent implements OnInit, OnDestroy {
           this.clear();
           this.success = true;
           this.checkoutOrder = !this.checkoutOrder;
+          // tslint:disable-next-line:radix
           this.allBonus = parseInt(localStorage.getItem('bonus'));
-          this.allBonus += this.bonus;
+          this.allBonus = this.bonus + this.total * 0.01;
           localStorage.setItem('bonus', this.allBonus);
         }
     });
