@@ -18,7 +18,7 @@ export class RequestService {
       'Access-Control-Allow-Origin' : '*',
     })
   };
-  baseUrl = 'http://d6033da0.ngrok.io/';
+  baseUrl = 'http://e9661ac1.ngrok.io/';
 
   getProduct(category) {
     if (category === null) {
@@ -48,7 +48,7 @@ export class RequestService {
   Registration(login, password, email, phone) {
     return this.http.post(`${this.baseUrl}/api/registration`, {login, password, email, phone});
   }
-  MakeOrder(products, storeId, total, isCard, address) {
-    return this.http.post(`${this.baseUrl}/api/make-order`, {products, storeId, total, isCard, address}, this.HttpOptions);
+  MakeOrder(products, total, isCard, address, kv, dom, phone, name, surname, taken) {
+    return this.http.post(`${this.baseUrl}/api/make-order`, {products, total, isCard, address, kv, dom, phone, name, surname, taken}, this.HttpOptions);
   }
 }

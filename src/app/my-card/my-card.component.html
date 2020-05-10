@@ -1,7 +1,9 @@
 <div [@dialog] *ngIf="visible" class="dialog">
   <button *ngIf="closable" (click)="close()" aria-label="Close" class="dialog__close-btn">X</button>
   <div class="basket">
-    <h3 class="titleBskt"><i>Моя корзина</i></h3>
+    <h3 class="titleBskt" *ngIf="success === false"><i>Моя корзина</i></h3>
+    <h3 class="thankYouNext" *ngIf="success === true"><i>Спасибо за покупку!</i></h3>
+    <h3 class="bonus" *ngIf="success === true"><i>Вам начислено {{bonus}} бонусов!</i></h3>
     <div class="scroll">
    <div class="basket-list" *ngFor="let product of products; index as i">
      <img src="{{baseUrl}}/{{product.image }}" alt="" class="pr-img">
@@ -19,57 +21,69 @@
    </div>
     </div>
   </div>
-  <p *ngIf="products">Итого {{total}} ₸</p>
+  <p *ngIf="products" class="total">Итого: {{total}} ₸</p>
+  <div *ngIf="login === false" class="warn">Залогиньтесь, пожалуйста!</div>
   <button class="clear" (click)="clear()" *ngIf="products">Очистить корзину</button>
   <button class="goToCard" (click)="checkout()" *ngIf="products">{{checkoutOrder ? 'Скрыть' : 'Оформить заказ'}}</button>
   <section *ngIf="checkoutOrder == true">
     <form [formGroup]="checkForm">
       <div class="form-group">
         <input type="text" class="form-control"
-               id="username-registration" name="name" formControlName="name"
+               id="username-registration" name="name" formControlName="name" [(ngModel)]="name"
                [ngClass]="{'is-invalid': checkForm.get('name').errors && checkForm.get('name').touched}" placeholder="Ваше имя">
         <div class="invalid-feedback" *ngIf="checkForm.get('name').touched && checkForm.get('name').hasError('required')">
           Обязательное поле!
         </div>
         <input type="text" class="form-control" formControlName="surname"
+               [(ngModel)]="surname"
                [ngClass]="{'is-invalid': checkForm.get('surname').errors && checkForm.get('surname').touched}" placeholder="Ваше фамилия">
         <div class="invalid-feedback" *ngIf="checkForm.get('surname').touched && checkForm.get('surname').hasError('required')">
           Обязательное поле!
         </div>
-        <input type="text" class="form-control" value="{{address}}" disabled>
+        <input type="text" class="form-control" value="{{address}}" disabled routerLink="'/delivery'">
         <div class="block-1">
           <input type="text" class="form-control"
                  formControlName="dom"
+                 [(ngModel)]="dom"
                  [ngClass]="{'is-invalid': checkForm.get('dom').errors && checkForm.get('dom').touched}" placeholder="Подъезд">
           <div class="invalid-feedback" *ngIf="checkForm.get('dom').touched && checkForm.get('dom').hasError('required')">
             Обязательное поле!
           </div>
           <input type="text" class="form-control"
                  formControlName="kv"
+                 [(ngModel)]="kvartira"
                [ngClass]="{'is-invalid': checkForm.get('kv').errors && checkForm.get('kv').touched}" placeholder="Квартира">
           <div class="invalid-feedback" *ngIf="checkForm.get('kv').touched && checkForm.get('kv').hasError('required')">
             Обязательное поле!
           </div>
         </div>
         <input type="text" prefix="+7" mask="9999999999" class="form-control" name="phone" formControlName="phone"
+               [(ngModel)]="phone"
                placeholder="Номер телефона">
         <div class="invalid-feedback" *ngIf="checkForm.get('phone').touched && checkForm.get('phone').hasError('required')">
           Обязательное поле!
         </div>
         <div class="choosePayType">
           <section class="div1">
-            <input type="radio" id="card" name="payment" value="card" checked>
+            <input type="radio" id="card" name="payment" value="card" checked (change)="onItemChange($event.target.value)">
             <label for="card" class="ttl">Картой</label>
           </section>
           <section class="div2">
-            <input type="radio" id="nal" name="payment" value="cash">
+            <input type="radio" id="nal" name="payment" value="cash" (change)="onItemChange($event.target.value)">
             <label for="nal" class="ttl">Наличными</label>
           </section>
         </div>
+        <input type="text" class="form-control" name="sdacha" formControlName="sdacha"
+               *ngIf="isCard === false"
+               [(ngModel)]="sdacha"
+               placeholder="Сдача с">
+        <div class="invalid-feedback" *ngIf="checkForm.get('sdacha').touched && checkForm.get('sdacha').hasError('required')">
+          Обязательное поле!
+        </div>
+        <button class="nextStep" (click)="nextStep()">Продолжить покупку</button>
       </div>
     </form>
   </section>
 </div>
-
 <div *ngIf="visible" class="overlay" (click)="close()"></div>
 

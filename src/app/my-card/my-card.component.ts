@@ -1,9 +1,11 @@
-import { Component, OnInit, Input, Output, OnChanges, EventEmitter } from '@angular/core';
+import {Component, OnInit, Input, Output, OnChanges, EventEmitter, OnDestroy} from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import {CardProductsService} from '../card-products.service';
 import {Observable, of, Subject} from 'rxjs';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {RequestService} from '../request.service';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-card',
@@ -22,17 +24,29 @@ import {ActivatedRoute, Router} from '@angular/router';
   ]
 })
 
-export class MyCardComponent implements OnInit {
+export class MyCardComponent implements OnInit, OnDestroy {
   @Input() closable = true;
   @Input() visible: boolean;
   @Output() visibleChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  unsub$ = new Subject();
   item: any;
   data: any;
   address: string;
   total: any;
   checkoutOrder = false;
+  isCard: any;
+  kvartira: number;
+  dom: number;
+  name: string;
+  surname: string;
+  phone: number;
+  sdacha: number;
+  bonus: any;
+  allBonus: any;
+  success = false;
+  login = true;
   private storageSub = new Subject<string>();
-  baseUrl = 'http://d6033da0.ngrok.io/';
+  baseUrl = 'http://e9661ac1.ngrok.io/';
   checkForm: FormGroup = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -40,11 +54,14 @@ export class MyCardComponent implements OnInit {
     surname: new FormControl('', [
       Validators.required,
       Validators.pattern(/[А-Яа-я]/)]),
-    kv: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-    dom: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
-    phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')])
+    kv: new FormControl('', [Validators.required]),
+    dom: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.pattern('[0-9]{10}')]),
+    sdacha: new FormControl('', [Validators.required])
   });
-  constructor(private cardProductsService: CardProductsService, private route: Router, private activeRoute: ActivatedRoute) { }
+  constructor(
+    private cardProductsService: CardProductsService, private route: Router, private activeRoute: ActivatedRoute,
+    private requestService: RequestService) { }
 
   ngOnInit() {
     this.address = localStorage.getItem('address');
@@ -57,6 +74,9 @@ export class MyCardComponent implements OnInit {
   }
   watchStorage(): Observable<any> {
     return this.storageSub.asObservable();
+  }
+  onItemChange(value) {
+    this.isCard = value === 'card';
   }
   get products() {
     return JSON.parse(localStorage.getItem('cart'));
@@ -81,7 +101,6 @@ export class MyCardComponent implements OnInit {
       };
       this.data = this.products;
       this.data[index] = this.item;
-      console.log(this.data);
       localStorage.setItem('cart', JSON.stringify(this.data));
     }
     this.storageSub.next('true');
@@ -95,7 +114,7 @@ export class MyCardComponent implements OnInit {
     };
     this.data = this.products;
     this.data[index] = this.item;
-    console.log(this.data);
+
     localStorage.setItem('cart', JSON.stringify(this.data));
     this.storageSub.next('true');
   }
@@ -114,11 +133,30 @@ export class MyCardComponent implements OnInit {
     if (localStorage.getItem('userName')) {
       this.checkoutOrder = !this.checkoutOrder;
     } else {
-      console.log('ЗАлогинься плиз');
+      this.login = false;
     }
   }
   close() {
     this.visible = false;
     this.visibleChange.emit(this.visible);
+  }
+  nextStep() {
+    // tslint:disable-next-line:max-line-length
+    this.requestService.MakeOrder(this.products, this.total, this.isCard, this.address, this.kvartira, this.dom, this.phone, this.name, this.surname, this.sdacha)
+      .pipe(takeUntil(this.unsub$)).subscribe((data: any) => {
+        if (data) {
+          this.bonus = data;
+          this.clear();
+          this.success = true;
+          this.checkoutOrder = !this.checkoutOrder;
+          this.allBonus = parseInt(localStorage.getItem('bonus'));
+          this.allBonus += this.bonus;
+          localStorage.setItem('bonus', this.allBonus);
+        }
+    });
+  }
+  ngOnDestroy(): void {
+    this.unsub$.next();
+    this.unsub$.complete();
   }
 }

@@ -154,3 +154,15 @@
   margin-bottom: 10px;
   font-weight: bold;
 }
+.warn {
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+  font-size: 15px;
+}
+.total {
+  text-align: center;
+  font-weight: bold;
+  color: crimson;
+  font-size: 15px;
+}

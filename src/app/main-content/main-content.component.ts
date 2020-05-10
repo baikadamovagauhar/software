@@ -26,7 +26,7 @@ export class MainContentComponent implements OnInit, OnDestroy {
   isInCart = [];
   arr = [];
 
-  baseUrl = 'http://d6033da0.ngrok.io/';
+  baseUrl = 'http://e9661ac1.ngrok.io/';
   constructor(
     private http: HttpClient,
     private requestService: RequestService,
@@ -42,6 +42,22 @@ export class MainContentComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (!localStorage.getItem('address')) {
       this.route.navigate(['/delivery']);
+    } else {
+      this.activatedRoute.queryParams.subscribe(params => {
+        let cleared = params.basket === 'clear';
+        if (cleared) {
+          for (let i = 0; i < this.inputNum.length; i++) {
+            this.inputNum[i] = 1;
+            this.isInCart[i] = 'Добавить';
+          }
+        }
+        this.route.navigate(
+          [],
+          {
+            relativeTo: this.activatedRoute,
+            queryParams: {}
+          });
+      });
     }
     this.activatedRoute.queryParams.subscribe(params => {
       this.parametr = params.scrollView;
@@ -76,21 +92,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
         this.storeProducts = data;
       }
     });
-    this.activatedRoute.queryParams.subscribe(params => {
-      let cleared = params.basket === 'clear';
-      if (cleared) {
-        for (let i = 0; i < this.inputNum.length; i++) {
-          this.inputNum[i] = 1;
-          this.isInCart[i] = 'Добавить';
-        }
-      }
-      this.route.navigate(
-        [],
-        {
-          relativeTo: this.activatedRoute,
-          queryParams: {}
-        });
-    });
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();
@@ -118,7 +119,6 @@ export class MainContentComponent implements OnInit, OnDestroy {
       pr = JSON.parse(localStorage.getItem('cart'));
     }
     let b = pr.concat(this.arr);
-    console.log(b);
     localStorage.setItem('cart', JSON.stringify(b));
   }
   minus(index: number) {
