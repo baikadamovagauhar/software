@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit, OnDestroy {
           localStorage.setItem('phone', data.user.phone_number);
           localStorage.setItem('bonus', data.user.bonuses);
           this.authorized = true;
-          // window.location.reload();
+          window.location.reload();
         }
     });
   }

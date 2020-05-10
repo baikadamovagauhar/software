@@ -21,7 +21,9 @@
    </div>
     </div>
   </div>
-  <p *ngIf="products" class="total">Итого: {{total}} ₸</p>
+  <p *ngIf="products" class="total">Доставка: 200 ₸</p>
+  <p *ngIf="products" class="total">Сумма заказа: {{total}} ₸</p>
+  <p *ngIf="products" class="total">К оплате: {{total + 200}} ₸</p>
   <div *ngIf="login === false" class="warn">Залогиньтесь, пожалуйста!</div>
   <button class="clear" (click)="clear()" *ngIf="products">Очистить корзину</button>
   <button class="goToCard" (click)="checkout()" *ngIf="products">{{checkoutOrder ? 'Скрыть' : 'Оформить заказ'}}</button>

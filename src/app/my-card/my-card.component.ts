@@ -151,9 +151,10 @@ export class MyCardComponent implements OnInit, OnDestroy {
           this.success = true;
           this.checkoutOrder = !this.checkoutOrder;
           // tslint:disable-next-line:radix
-          this.allBonus = parseInt(localStorage.getItem('bonus'));
-          this.allBonus = this.bonus + this.total * 0.01;
+          this.allBonus = parseInt(localStorage.getItem('bonus'), 10);
+          this.allBonus += this.bonus;
           localStorage.setItem('bonus', this.allBonus);
+          window.location.reload();
         }
     });
   }
